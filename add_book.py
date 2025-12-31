@@ -51,7 +51,7 @@ def fetch_openlibrary_metadata(query: str, books: list) -> dict:
 
     # do not run the same query twice
     if query in existing_queries:
-        warn(f"The query '{query}' was already queried — skipping.")
+        warn(f"The query `{query}` was already queried — skipping.")
         return False
 
     book_search_response = requests.get(
@@ -64,7 +64,7 @@ def fetch_openlibrary_metadata(query: str, books: list) -> dict:
 
     # check if we found a book (numFound > 0)
     if not book_search_data.get("numFound", False):
-        warn(f"No results found on OpenLibrary for query '{query}'.")
+        warn(f"No results found on OpenLibrary for query `{query}`.")
         return False
 
     # data is in the docs attribute
@@ -75,7 +75,9 @@ def fetch_openlibrary_metadata(query: str, books: list) -> dict:
 
     # Check for duplicates, stop if book already exists in db
     if work_id in existing_work_keys:
-        warn(f"Book with key {work_id} already exists — skipping.")
+        warn(
+            f'Book with key `{work_id}` ({next((item["meta"]["title"] for item in books if item.get("meta", {}).get("key") == "/works/OL27448W"), None)}) already exists — skipping.'
+        )
         return False
 
     work_response = requests.get(f"{open_library_url}/{work_id}.json", timeout=10)
@@ -291,13 +293,13 @@ def parse_issue():
     }
 
     if review_date == defaults["review date"]:
-        warn("Review date is still placeholder (YYYY-MM-DD).")
+        warn("Review date is still placeholder (`YYYY-MM-DD`).")
 
     if proposer == defaults["proposer"]:
-        warn("Proposer is still placeholder (namehere).")
+        warn("Proposer is still placeholder (`namehere`).")
 
     if participants_raw == defaults["participants"]:
-        warn("Participants are still placeholder (p1, p2, p3).")
+        warn("Participants are still placeholder (`p1, p2, p3`).")
 
     # -------------------------------
     # Date validation (non-fatal)
