@@ -207,10 +207,20 @@ def post_issue_comment(body: str):
     """
     token = os.environ.get("GITHUB_TOKEN")
     repo = os.environ.get("GITHUB_REPOSITORY")
-    issue_number = os.environ.get("GITHUB_ISSUE_NUMBER")
+    event_path = os.environ.get("GITHUB_EVENT_PATH")
 
-    if not all([token, repo, issue_number]):
+    if not all([token, repo, event_path]):
         print("Missing GitHub context — not posting comment.")
+        return
+
+    import json
+
+    with open(event_path, "r", encoding="utf-8") as f:
+        event = json.load(f)
+
+    issue_number = event.get("issue", {}).get("number")
+    if not issue_number:
+        print("Could not determine issue number from event — skipping comment.")
         return
 
     url = f"https://api.github.com/repos/{repo}/issues/{issue_number}/comments"
