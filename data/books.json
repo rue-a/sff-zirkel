@@ -1,0 +1,30 @@
+[
+  {
+    "query": "9780061233326",
+    "review_date": "YYYY-MM-DD",
+    "proposer": "arne",
+    "participants": [
+      "arne",
+      "namehere2",
+      "namehere3"
+    ],
+    "ratings": {
+      "arne": null,
+      "namehere2": null,
+      "namehere3": null
+    },
+    "meta": {
+      "title": "Pilgrim at Tinker Creek",
+      "key": "/works/OL14857913W",
+      "authors": "Annie Dillard",
+      "first_publish_year": 1974,
+      "edition_count": 18,
+      "subjects": "Nature, Biography & Autobiography, Nonfiction, open_syllabus_project, Philosophy of nature, Essays (single author), Academic Literacy, Reading Level-Grade 7, Reading Level-Grade 8, Reading Level-Grade 9, Reading Level-Grade 10, Reading Level-Grade 11, Reading Level-Grade 12, Natural history",
+      "pages": "271 p. ;",
+      "weight": "",
+      "description": "",
+      "first_sentence": "I USED TO HAVE a cat, an old fighting tom, who would jump through the open window by my bed in the middle of the night and land on my chest.",
+      "cover_path": "covers/OL2550741M.jpg"
+    }
+  }
+]
