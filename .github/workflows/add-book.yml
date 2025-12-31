@@ -9,12 +9,11 @@ jobs:
     if: |
       contains(github.event.issue.labels.*.name, 'book') &&
       contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association)
-
     runs-on: ubuntu-latest
-
     permissions:
       contents: write
       issues: write
+      pull-requests: write
 
     steps:
       - name: Checkout repository
@@ -31,21 +30,33 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run book ingestion script
+        id: add_book
         env:
           GITHUB_EVENT_PATH: ${{ github.event_path }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
           python add_book.py
+          echo "book_added=$?" >> $GITHUB_OUTPUT
 
-      - name: Commit changes
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
+      - name: Create Pull Request
+        if: steps.add_book.outputs.book_added == 'True'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Add book from issue #${{ github.event.issue.number }}"
+          title: "Add book from issue #${{ github.event.issue.number }}"
+          body: |
+            This PR adds a book from issue #${{ github.event.issue.number }}
 
-          git add data/books.json covers || true
-          git diff --cached --quiet || git commit -m "Add book from issue #${{ github.event.issue.number }}"
+            Closes #${{ github.event.issue.number }}
+          base: main
+          branch: add-book-issue-${{ github.event.issue.number }}
+          labels: book
 
-      - name: Push changes
-        run: |
-          git push
+      - name: Auto-merge PR
+        if: steps.add_book.outputs.book_added == 'True'
+        uses: "pascalgn/automerge-action@v0.17.0"
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          merge-method: squash

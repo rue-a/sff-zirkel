@@ -76,7 +76,7 @@ def fetch_openlibrary_metadata(query: str, books: list) -> dict:
     # Check for duplicates, stop if book already exists in db
     if work_id in existing_work_keys:
         warn(
-            f'Book with key `{work_id}` ({next((item["meta"]["title"] for item in books if item.get("meta", {}).get("key") == "/works/OL27448W"), None)}) already exists — skipping.'
+            f'A title with key `{work_id}` ({next((item["meta"]["title"] for item in books if item.get("meta", {}).get("key") == "/works/OL27448W"), None)}) already exists — skipping.'
         )
         return False
 
@@ -308,7 +308,7 @@ def parse_issue():
         try:
             datetime.strptime(review_date, "%Y-%m-%d")
         except ValueError:
-            warn(f"Review date '{review_date}' is not in YYYY-MM-DD format.")
+            warn(f"Review date `{review_date}` is not in YYYY-MM-DD format.")
 
     # -------------------------------
     # Participants parsing
@@ -340,6 +340,10 @@ def parse_issue():
     post_issue_comment(summary)
     print(f"::notice::{summary}")
 
+    return bool(book_meta)
+
 
 if __name__ == "__main__":
-    parse_issue()
+    title_added = parse_issue()
+    # Exit code 1 if nothing was added (optional)
+    exit("True" if title_added else "False")
