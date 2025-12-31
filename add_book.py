@@ -23,6 +23,7 @@ def warn(msg):
 def extract_field(body: str, field: str) -> str:
     """
     Extracts values like:
+    - ISBN: `9781234567890`
     - review date: `2025-03-14`
     - proposer: `arne`
     """
@@ -255,12 +256,12 @@ def parse_issue():
     # ISBN from title
     # -------------------------------
     # Keep digits and X only (ISBN-10 or 13)
-    isbn = re.sub(r"[^0-9X]", "", title.upper())
+    isbn = re.sub(r"[^0-9X]", "", extract_field(body, "ISBN"))
 
     # if isbn is not valid, try with entered title
     if len(isbn) not in (10, 13):
         fallback = title.strip()
-        warn(f"No ISBN detected in title, trying: `{fallback}`")
+        warn(f"No valid ISBN detected, trying issue title: `{fallback}`")
         isbn = fallback
 
     # -------------------------------
