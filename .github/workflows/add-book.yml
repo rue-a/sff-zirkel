@@ -62,52 +62,32 @@ jobs:
         run: python add_book.py
 
       - name: Create branch and commit
-        id: commit
         run: |
-          # Configure git
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
 
-          # Set variables
-          BRANCH="book/issue-${{ github.event.issue.number }}"
-          FILES="data/books.json covers"
+          BRANCH="book-issue-${{ github.event.issue.number }}"
+          git checkout -B "$BRANCH"
 
-          # Fetch latest main
-          git fetch origin main
+          git add data/books.json covers || true
+          git diff --cached --quiet && exit 0
 
-          # Checkout or reset branch from main
-          git checkout -B "$BRANCH" origin/main
-
-          # Add files
-          git add $FILES || true
-
-          # Check if there are changes
-          if git diff --cached --quiet; then
-            echo "No changes to commit"
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-
-          # Commit and push
           git commit -m "Add book from issue #${{ github.event.issue.number }}"
           git push --force origin "$BRANCH"
 
-          echo "changed=true" >> "$GITHUB_OUTPUT"
-
       - name: Create PR
-        if: steps.commit.outputs.changed == 'true'
+        id: pr
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh pr create \
-            --head "book/issue-${{ github.event.issue.number }}" \
+            --head "book-issue-${{ github.event.issue.number }}" \
             --base main \
             --title "Add book from issue #${{ github.event.issue.number }}" \
-            --body "Fixes #${{ github.event.issue.number }}" \
+            --body "Closes #${{ github.event.issue.number }}" \
             --label "automated"
 
       - name: Enable native auto-merge
-        if: steps.commit.outputs.changed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
