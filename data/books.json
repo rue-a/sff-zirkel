@@ -1,0 +1,58 @@
+[
+  {
+    "query": "herr der ringe die gef\u00e4hrten",
+    "review_date": "YYYY-MM-DD",
+    "proposer": "namehere",
+    "participants": [
+      "namehere",
+      "namehere2",
+      "namehere3"
+    ],
+    "ratings": {
+      "namehere": null,
+      "namehere2": null,
+      "namehere3": null
+    },
+    "meta": {
+      "title": "The Fellowship of the Ring",
+      "key": "/works/OL27513W",
+      "authors": "J.R.R. Tolkien",
+      "first_publish_year": 1954,
+      "edition_count": 297,
+      "subjects": "Elves, Dwarves, evil, fear, hope, young adult fiction, Ficci\u00f3n, Ficci\u00f3n fant\u00e1stica inglesa, Fantastic fiction, The Lord of the Rings, English Fantasy fiction, Open Library Staff Picks, Fiction, Fantasy, Fairy tales, Adventure stories, Fantasy fiction, Middle Earth (Imaginary place), History and criticism, FICTION / Fantasy / Epic, Adventure fiction, English fiction, Translations in Chinese, Fiction, fantasy, epic, Middle earth (imaginary place), fiction, Baggins, frodo (fictitious character), fiction, Gandalf (fictitious character), fiction, British and irish fiction (fictional works by one author), Baggins, bilbo (fictitious character), fiction, Fiction, media tie-in, Children's fiction, English literature, Roman, Fran\u00e7ais (langue), Lectures et morceaux choisis, Vol. 1., Lord of the rings (Tolkien, J.R.R.), Gandolf (Fictitious character), Terre du Milieu (Lieu imaginaire), Romans, nouvelles, Frodo Baggins (Fictitious character), Fiction, fantasy, general, Translations into Yiddish",
+      "pages": "",
+      "weight": "",
+      "description": "One Ring to rule them all, One Ring to find them, One Ring to bring them all and in the darkness bind them.\r\n\r\n\u201cA unique, wholly realized other world, evoked from deep in the well of Time, massively detailed, absorbingly entertaining, profound in meaning.\u201d\u2014The New York Times\r\n\r\nIn ancient times the Rings of Power were crafted by the Elven-smiths, and Sauron, the Dark Lord, forged the One Ring, filling it with his own power so that he could rule all others. But the One Ring was taken from him, and though he sought it throughout Middle-earth, it remained lost to him. After many ages it fell into the hands of Bilbo Baggins, as told in The Hobbit. In a sleepy village in the Shire, young Frodo Baggins finds himself faced with an immense task, as his elderly cousin Bilbo entrusts the Ring to his care. Frodo must leave his home and make a perilous journey across Middle-earth to the Cracks of Doom, there to destroy the Ring and foil the Dark Lord in his evil purpose.",
+      "first_sentence": "THIS BOOK is largely concerned with Hobbits, and from its pages a reader may discover much of their character and a little of their history.",
+      "cover_path": "covers/OL51708686M.jpg"
+    }
+  },
+  {
+    "query": "9781035045686",
+    "review_date": "tba",
+    "proposer": "arne",
+    "participants": [
+      "arne",
+      "thomas",
+      "joost"
+    ],
+    "ratings": {
+      "arne": null,
+      "thomas": null,
+      "joost": null
+    },
+    "meta": {
+      "title": "Service Model",
+      "key": "/works/OL37576633W",
+      "authors": "Adrian Tchaikovsky",
+      "first_publish_year": 2024,
+      "edition_count": 5,
+      "subjects": "Fiction, Science fiction",
+      "pages": "",
+      "weight": "",
+      "description": "Task Item No. 1: Become Self-Aware\r\nMeet Charles\u2122, the latest in robot servant technology. Programmed to undertake the most menial household chores, Charles is loyal, efficient and logical to a fault - that is, until a rather large fault causes him to murder his owner. Understandably perplexed, Charles finds himself without a master and, in a society reliant on artificial labour, worthless. Fleeing the household, he enters a world he never knew existed. Here, an age-old human hierarchy is disintegrating, and a robot ecosystem devoted to its well-being is struggling to find a purpose.\r\nCharles must face new challenges, illogical tasks and a cast of irrational characters. He'll discover that all it takes to overcome the limits of your programming is a nudge. But can he help fix the world, or is it too badly broken?",
+      "first_sentence": "",
+      "cover_path": "covers/OL59424202M.jpg"
+    }
+  }
+]
