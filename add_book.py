@@ -12,6 +12,7 @@ import requests
 BOOKS_FILE = Path("data/books.json")
 COVERS_PATH = Path("covers")
 WARNINGS = []
+QUERY_URL = None
 # -----------------------------------
 
 
@@ -54,10 +55,11 @@ def fetch_openlibrary_metadata(query: str, books: list) -> dict:
         warn(f"The query `{query}` was already queried — skipping.")
         return False
 
-    print(f"Querying: {open_library_url}/search.json?q={query}")
     search_response = requests.get(
-        f"{open_library_url}/search.json", params={"q": query, "limit": 1}, timeout=10
+        f"{open_library_url}/search.json", params={"q": query, "limit": 10}, timeout=10
     )
+    print(f"Querying: {search_response.url}")
+    QUERY_URL = search_response.url
 
     # raise_for_status() throws exception if request failed
     search_response.raise_for_status()
@@ -70,7 +72,7 @@ def fetch_openlibrary_metadata(query: str, books: list) -> dict:
 
     if search_data["numFound"] > 1:
         warn(
-            f"Result is ambigous, {search_data['numFound']} matches found. Selecting match with most editions among frist ten matches."
+            f"Result is ambigous, {search_data['numFound']} matches found. Selecting match with most editions among the first ten matches."
         )
 
     # data is in the docs attribute (find doc with most editions)
@@ -189,7 +191,7 @@ def build_summary(
     """
 
     lines = ["# SUMMARY"]
-    lines.append(f"**Query:** {query}\n\n")
+    lines.append(f"**Query:** {query} ({QUERY_URL})\n\n")
 
     if not meta:
         lines.append("❌ **No book entry created**\n")
