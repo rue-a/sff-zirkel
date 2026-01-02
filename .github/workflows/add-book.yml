@@ -66,7 +66,7 @@ jobs:
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
 
-          BRANCH="book-issue-${{ github.event.issue.number }}"
+          BRANCH="add-book-issue-${{ github.event.issue.number }}"
           git checkout -B "$BRANCH"
 
           git add data/books.json covers || true
@@ -81,10 +81,10 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh pr create \
-            --head "book-issue-${{ github.event.issue.number }}" \
+            --head "add-book-issue-${{ github.event.issue.number }}" \
             --base main \
             --title "Add book from issue #${{ github.event.issue.number }}" \
-            --body "Closes #${{ github.event.issue.number }}" \
+            --body "Handles #${{ github.event.issue.number }}" \
             --label "automated"
 
       - name: Enable native auto-merge
@@ -92,4 +92,4 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           PR_URL=$(gh pr view --json url -q .url)
-          gh pr merge "$PR_URL" --squash --auto
+          gh pr merge "$PR_URL" --squash --auto --delete-branch
