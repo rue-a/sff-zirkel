@@ -26,5 +26,33 @@
       "first_sentence": "THIS BOOK is largely concerned with Hobbits, and from its pages a reader may discover much of their character and a little of their history.",
       "cover_path": "covers/OL51708686M.jpg"
     }
+  },
+  {
+    "query": "9781035045686",
+    "review_date": "tba",
+    "proposer": "arne",
+    "participants": [
+      "arne",
+      "thomas",
+      "joost"
+    ],
+    "ratings": {
+      "arne": null,
+      "thomas": null,
+      "joost": null
+    },
+    "meta": {
+      "title": "Service Model",
+      "key": "/works/OL37576633W",
+      "authors": "Adrian Tchaikovsky",
+      "first_publish_year": 2024,
+      "edition_count": 5,
+      "subjects": "Fiction, Science fiction",
+      "pages": "",
+      "weight": "",
+      "description": "Task Item No. 1: Become Self-Aware\r\nMeet Charles\u2122, the latest in robot servant technology. Programmed to undertake the most menial household chores, Charles is loyal, efficient and logical to a fault - that is, until a rather large fault causes him to murder his owner. Understandably perplexed, Charles finds himself without a master and, in a society reliant on artificial labour, worthless. Fleeing the household, he enters a world he never knew existed. Here, an age-old human hierarchy is disintegrating, and a robot ecosystem devoted to its well-being is struggling to find a purpose.\r\nCharles must face new challenges, illogical tasks and a cast of irrational characters. He'll discover that all it takes to overcome the limits of your programming is a nudge. But can he help fix the world, or is it too badly broken?",
+      "first_sentence": "",
+      "cover_path": "covers/OL59424202M.jpg"
+    }
   }
 ]
