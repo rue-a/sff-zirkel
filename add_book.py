@@ -54,24 +54,30 @@ def fetch_openlibrary_metadata(query: str, books: list) -> dict:
         warn(f"The query `{query}` was already queried — skipping.")
         return False
 
-    book_search_response = requests.get(
-        f"{open_library_url}/search.json", params={"q": query}, timeout=10
+    print(f"Querying: {open_library_url}/search.json?q={query}")
+    search_response = requests.get(
+        f"{open_library_url}/search.json", params={"q": query, "limit": 1}, timeout=10
     )
 
     # raise_for_status() throws exception if request failed
-    book_search_response.raise_for_status()
-    book_search_data = book_search_response.json()
+    search_response.raise_for_status()
+    search_data = search_response.json()
 
     # check if we found a book (numFound > 0)
-    if not book_search_data.get("numFound", False):
+    if not search_data.get("numFound", False):
         warn(f"No results found on OpenLibrary for query `{query}`.")
         return False
 
-    # data is in the docs attribute
-    book_search_data = book_search_data["docs"][0]
+    if search_data["numFound"] > 1:
+        warn(
+            f"Result is ambigous, {search_data['numFound']} matches found. Selecting match with most editions among frist ten matches."
+        )
+
+    # data is in the docs attribute (find doc with most editions)
+    search_data = max(search_data["docs"], key=lambda d: d["edition_count"])
 
     # in open library terms, a work is the sum of all editions
-    work_id = book_search_data["key"]
+    work_id = search_data["key"]
 
     # Check for duplicates, stop if book already exists in db
     if work_id in existing_work_keys:
@@ -85,7 +91,13 @@ def fetch_openlibrary_metadata(query: str, books: list) -> dict:
     work_data = work_response.json()
 
     # the cover edition is the edition (book) used to represent the work
-    cover_edition_key = book_search_data["cover_edition_key"]
+    cover_edition_key = search_data.get("cover_edition_key", False)
+    if not cover_edition_key:
+        warn(
+            "The query yielded no cover edition, thus we probably found a wrong record. Aborting..."
+        )
+        return False
+
     cover_edition_response = requests.get(
         f"{open_library_url}/books/{cover_edition_key}.json",
         timeout=10,
@@ -107,13 +119,13 @@ def fetch_openlibrary_metadata(query: str, books: list) -> dict:
         fs = fs.get("value", "")
 
     data = {
-        "title": book_search_data.get("title", ""),
-        "key": book_search_data.get("key", ""),
-        "authors": ", ".join(book_search_data.get("author_name", [""])),
-        "first_publish_year": book_search_data.get("first_publish_year", ""),
-        "edition_count": book_search_data.get("edition_count", ""),
+        "title": search_data.get("title", ""),
+        "key": search_data.get("key", ""),
+        "authors": ", ".join(search_data.get("author_name", [""])),
+        "first_publish_year": search_data.get("first_publish_year", ""),
+        "edition_count": search_data.get("edition_count", ""),
         "subjects": ", ".join(work_data.get("subjects", [""])),
-        "pages": cover_edition_data.get("pagination", ""),
+        "pages": cover_edition_data.get("nb_of_pages", ""),
         "weight": cover_edition_data.get("weight", ""),
         "description": desc,
         "first_sentence": fs,
@@ -177,6 +189,7 @@ def build_summary(
     """
 
     lines = ["# SUMMARY"]
+    lines.append(f"**Query:** {query}\n\n")
 
     if not meta:
         lines.append("❌ **No book entry created**\n")
@@ -185,7 +198,6 @@ def build_summary(
         lines.append("✅ **Book entry created**\n")
 
         # Core info
-        lines.append(f"**Query:** {query}")
 
         title = meta.get("title", "")
         isbn = f"**ISBN:** {isbn}"
@@ -224,8 +236,6 @@ def post_issue_comment(body: str):
     if not all([token, repo, event_path]):
         print("Missing GitHub context — not posting comment.")
         return
-
-    import json
 
     with open(event_path, "r", encoding="utf-8") as f:
         event = json.load(f)
