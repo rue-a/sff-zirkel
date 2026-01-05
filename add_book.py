@@ -198,7 +198,6 @@ def add_book(isbn, proposer, participants, review_date):
 def build_summary(
     *,
     query: str,
-    isbn: str,
     review_date: str,
     proposer: str,
     participants: list[str],
@@ -245,14 +244,16 @@ def build_summary(
 
     # Warnings section
     if warnings:
-        lines.append("\n>[!WARNING] **Warnings**\n>")
+        lines.append("### Warnings")
+        lines.append("\n> [!WARNING]\n>")
 
         for w in warnings:
             lines.append(f"> - {w}")
 
     # Warnings section
     if notices:
-        lines.append("\n>[!NOTE] **Notes**\n>")
+        lines.append("### Notes")
+        lines.append("\n> [!NOTE]\n>")
 
         for n in notices:
             lines.append(f"> - {n}")
@@ -386,7 +387,6 @@ def parse_issue():
 
     summary = build_summary(
         query=query,
-        isbn=isbn,
         review_date=review_date,
         proposer=proposer,
         participants=participants,
