@@ -78,5 +78,55 @@
       "cover_path": "covers/14625765.jpg",
       "cover_url": "https://covers.openlibrary.org/b/id/14625765-M.jpg"
     }
+  },
+  {
+    "query": "Service Model",
+    "review_date": "tba",
+    "proposer": "arne",
+    "participants": [
+      "arne",
+      "thomas",
+      "joost"
+    ],
+    "ratings": {
+      "arne": null,
+      "thomas": null,
+      "joost": null
+    },
+    "meta": {
+      "key": "/works/OL145191W",
+      "type": "work",
+      "title": "Picasso",
+      "authors": "Pablo Picasso, Jean-Louis Andral, Pierre Daix",
+      "first_publish_year": 1926,
+      "first_edition": "",
+      "number_of_pages_median": 107,
+      "first_sentence": "",
+      "description": "In 1946, when Picasso received the offer to use one of the great rooms in the castle at Antibes as a studio, he exclaimed enthusiastically: \u201cI'm not only going to paint, I'll decorate the museum too.\u201d The result was a series of paintings and drawings that reflected the jubilant spirit, the joie de vivre, of a country that was free once more. Picasso later added sculptures, graphic works, and ceramics to this collection, forming the basis for what would be France's first museum dedicated to him, inaugurated in 1966 as Mus\u00e9e Picasso, Antibes.This catalog, published in conjunction with the exhibition of Palazzo Grassi, comprises a great selection of the most outstanding works from the Mus\u00e9e Picasso of Antibes, a large number of which have never been shown beyond the museum's walls. These include the murals La Joie de Vivre, 1946, The Sea Urchin Eater, 1946, and the impressive sculpture Head of Woman with Chignon, 1932. Featuring paintings, drawings, sculptures, and ceramics, the works illustrate a splendid period in Picasso's artistic career. The volume also includes a selection of photographs of Picasso by Polish artist Michel Sima, which portray the context in which Picasso created the works.",
+      "subjects": "20th century, Amsterdam (Netherlands), Amsterdam (Netherlands). Stedelijk Museum, Animals, Animals in art, Anniversaries, Art, Art collections, Avant-garde (Aesthetics), Ballet, Bullfighters in art, Bullfights in art, Bulls in art, Catalogs, Ceramic sculpture, Ceramics, Contributions in theater, Costume, Crawford Municipal Art Gallery, Criticism and interpretation, Cubism, Drawing, Etching, Exhibitions, Expositions, France, French Pottery, Galerie Beyeler, Germany, Graphic arts, Hamburger Kunsthalle, History, Human beings in art, Influence, Italy, Jan Krugier Gallery (New York, N.Y.), Journeys, Kunstmuseum Heidenheim, Linoleum block printing, Linoleum block-printing, Lithography, Minotaur (Greek mythology), Modern Art, Modernism (Art), Museo Picasso, Museum Ludwig, Museum of Modern Art (New York, N.Y.), Mus\u00e9e Picasso (Paris, France), Mus\u00e9e R\u00e9attu, National Gallery of Australia, Painting, Philosophy, Pictorial works, Portraits, Posters, Pottery, Primitivism in art, Prints, Private collections, Richard Harris Collection, Spain, Spanish Drawing, Spanish Posters, Spanish Prints, Spanish Watercolor painting, Staatliche Kunstsammlungen Dresden, Staatliche Kunstsammlungen Dresden. Kupferstich-Kabinett, Stage-setting and scenery, Tacoma Art Museum, Travel, Women in art, Appropriation (Art), Biography, Artists, Exhibition catalogues and specific collections, Individual artists, Individual Painters - 20th Century, Museology (General), Art & Art Instruction, Individual Artist, Art / Individual Artist, Landscapes in art, Outdoor sculpture, Artists' preparatory studies, Last years, Imitation in art, Erotic drawing, Picasso, pablo, 1881-1973, French Art, Painting, spanish, Catalogues d'exposition, Cubismo, Museu Nacional d'Art de Catalunya, Linoleumsneden, Painting, exhibitions, Mithras (Zoroastrian deity), Erotic art, Art, modern, 20th century, exhibitions, Spanish Pottery, Museum W\u00fcrth, Falla, manuel de, 1876-1946, Clothing, Notebooks, sketchbooks, Painters, Catalogues raisonn\u00e9s",
+      "edition_count": 240,
+      "id_wikidata": "",
+      "place": [
+        "Barcelona",
+        "Cologne",
+        "France",
+        "Germany",
+        "Hamburg",
+        "Heidenheim",
+        "Italy",
+        "Mougins",
+        "New York",
+        "New York (State)",
+        "Paris",
+        "Spain",
+        "Tacoma",
+        "Washington (State)"
+      ],
+      "time": [
+        "20th century"
+      ],
+      "cover_path": "covers/2238306.jpg",
+      "cover_url": "https://covers.openlibrary.org/b/id/2238306-M.jpg"
+    }
   }
 ]
