@@ -1,0 +1,35 @@
+[
+  {
+    "query": "9781035045686",
+    "review_date": "tba",
+    "proposer": "arne",
+    "participants": [
+      "arne",
+      "thomas",
+      "joost"
+    ],
+    "ratings": {
+      "arne": null,
+      "thomas": null,
+      "joost": null
+    },
+    "meta": {
+      "key": "/works/OL37576633W",
+      "type": "work",
+      "title": "Service Model",
+      "authors": "Adrian Tchaikovsky",
+      "first_publish_year": 2024,
+      "first_edition": "",
+      "number_of_pages_median": "",
+      "first_sentence": "On activation each morning Charles' first duty was to check his master's travel arrangements for the day.",
+      "description": "Task Item No. 1: Become Self-Aware\r\nMeet Charles\u2122, the latest in robot servant technology. Programmed to undertake the most menial household chores, Charles is loyal, efficient and logical to a fault - that is, until a rather large fault causes him to murder his owner. Understandably perplexed, Charles finds himself without a master and, in a society reliant on artificial labour, worthless. Fleeing the household, he enters a world he never knew existed. Here, an age-old human hierarchy is disintegrating, and a robot ecosystem devoted to its well-being is struggling to find a purpose.\r\nCharles must face new challenges, illogical tasks and a cast of irrational characters. He'll discover that all it takes to overcome the limits of your programming is a nudge. But can he help fix the world, or is it too badly broken?",
+      "subjects": "Fiction, Science fiction",
+      "edition_count": 5,
+      "id_wikidata": "",
+      "place": "",
+      "time": "",
+      "cover_path": "covers/15098528.jpg",
+      "cover_url": "https://covers.openlibrary.org/b/id/15098528-M.jpg"
+    }
+  }
+]
