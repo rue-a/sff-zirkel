@@ -1,0 +1,41 @@
+.topbar,
+.bottombar {
+	position: sticky;
+	left: 0;
+	right: 0;
+	padding: 0.75rem 1.5rem;
+	font-size: 1.2rem;
+	background: #fffff8;
+	border-bottom: 1px solid #ddd;
+	z-index: 10;
+}
+
+.topbar {
+	top: 0;
+}
+
+.bottombar {
+	bottom: 0;
+	border-top: 1px solid #ddd;
+	border-bottom: none;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+
+	.topbar,
+	.bottombar {
+		background: #151515;
+		border-color: #333;
+	}
+}
+
+
+p.h2subtitle {
+	font-style: italic;
+	margin-top: -0.8rem;
+	margin-bottom: 1.4rem;
+	font-size: 1.4rem;
+	display: block;
+	line-height: 1;
+}
