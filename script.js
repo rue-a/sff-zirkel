@@ -26,6 +26,8 @@ function renderBook(book) {
 	h2_subtitle.className = "h2subtitle";
 	h2_subtitle.textContent = `by ${book.meta.authors}`;
 	section.appendChild(h2_subtitle)
+	const margin_anchor = document.createElement("p")
+	section.appendChild(margin_anchor)
 
 	// Right margin book cover 
 	if (book.meta.cover_url) {
@@ -38,7 +40,7 @@ function renderBook(book) {
 		img.alt = book.meta.title;
 
 		cover_img.appendChild(img);
-		section.appendChild(cover_img);
+		margin_anchor.appendChild(cover_img);
 	}
 
 	// metadata in margin note
@@ -48,23 +50,29 @@ function renderBook(book) {
 
 	const metaLines = [
 		metaLine("Authors", book.meta.authors),
-		metaLine("Query", book.query),
-		metaLine("Review date", book.review_date),
-		metaLine("Proposed by", book.proposer),
-		metaLine("Participants", join(book.participants)),
+		// metaLine("Query", book.query),
+		// metaLine("Review date", book.review_date),
+		// metaLine("Proposed by", book.proposer),
+		// metaLine("Participants", join(book.participants)),
 		metaLine("First published", book.meta.first_publish_year),
 		metaLine("Edition count", book.meta.edition_count),
 		metaLine("Number of pages", book.meta.number_of_pages_median),
 		metaLine("Subjects", book.meta.subjects),
 		metaLine("Places", join(book.meta.place)),
 		metaLine("Time", join(book.meta.time)),
-		metaLine("OpenLibrary key", book.meta.key),
-		metaLine("Wikidata ID", join(book.meta.id_wikidata))
+		metaLine("OpenLibrary key", `<a href=https://openlibrary.org${book.meta.key}><code>${book.meta.key.replace("/works/", "")}</code></a>`),
+		metaLine(
+			"Wikidata IDs",
+			(book.meta.id_wikidata || [])
+				.map(id => `<a href="https://www.wikidata.org/wiki/${id}"><code>${id}</code></a>`)
+				.join(", ")
+		)
+
 	];
 
 	margin_meta.innerHTML = metaLines.join("");
 
-	section.appendChild(margin_meta);
+	margin_anchor.appendChild(margin_meta);
 
 
 	// first sentence epigraph
@@ -74,10 +82,10 @@ function renderBook(book) {
 		const fs_blockquote = document.createElement("blockquote")
 		const fs_text = document.createElement("p")
 		fs_text.textContent = book.meta.first_sentence
-		const fs_footer = document.createElement("footer")
-		fs_footer.textContent = `first sentence`
+		// const fs_footer = document.createElement("footer")
+		// fs_footer.textContent = `first sentence`
 		fs_blockquote.appendChild(fs_text)
-		fs_blockquote.appendChild(fs_footer)
+		// fs_blockquote.appendChild(fs_footer)
 		fs_div.appendChild(fs_blockquote)
 		section.appendChild(fs_div)
 	}
@@ -101,8 +109,7 @@ function renderBook(book) {
 }
 
 function metaLine(key, value) {
-	if (!value || value.length === 0) return "";
-	return `<strong>${key}:</strong> ${value}<br>`;
+	return value ? `<strong>${key}:</strong> ${value}<br>` : "";
 }
 
 function join(v) {
