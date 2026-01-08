@@ -63,7 +63,6 @@ function renderBook(book) {
 		// metaLine("Query", book.query),
 		// metaLine("Review date", book.review_date),
 		// metaLine("Proposed by", book.proposer),
-		// metaLine("Participants", join(book.participants)),
 		metaLine("First published", book.meta.first_publish_year),
 		metaLine("Edition count", book.meta.edition_count),
 		metaLine("Pages", book.meta.number_of_pages_median),
@@ -113,6 +112,19 @@ function renderBook(book) {
 		section.appendChild(desc);
 	}
 
+	const ratings_table = createRatingsTable(book.ratings)
+	if (ratings_table) {
+		const ratings_title = document.createElement("h3")
+		ratings_title.textContent = "Ratings"
+
+		section.appendChild(ratings_title)
+		ratings_table.className = "latex-table"
+		const ratings_table_holder = document.createElement("p")
+		ratings_table_holder.appendChild(ratings_table)
+		section.appendChild(ratings_table_holder)
+
+	}
+
 
 
 	return section;
@@ -124,4 +136,45 @@ function metaLine(key, value) {
 
 function join(v) {
 	return Array.isArray(v) ? v.join(", ") : v;
+}
+
+
+
+function createRatingsTable(ratings) {
+	/**
+ * Creates an HTML table for given ratings.
+ * @param {Object} ratings - Object where keys are raters and values are ratings
+ * @returns {HTMLTableElement|null} - Table element if ratings exist, otherwise null
+ */
+	if (!ratings || Object.keys(ratings).length === 0) {
+		return null; // no ratings, return null
+	}
+
+	const table = document.createElement("table");
+	table.style.borderCollapse = "collapse";
+	table.style.marginBottom = "1rem";
+
+	// First row: rater names
+	const headerRow = document.createElement("tr");
+	for (const rater in ratings) {
+		const th = document.createElement("th");
+		th.innerText = rater;
+		th.style.border = "1px solid #ccc";
+		th.style.padding = "0.5rem";
+		headerRow.appendChild(th);
+	}
+	table.appendChild(headerRow);
+
+	// Second row: ratings
+	const ratingRow = document.createElement("tr");
+	for (const rater in ratings) {
+		const td = document.createElement("td");
+		td.innerText = ratings[rater];
+		td.style.border = "1px solid #ccc";
+		td.style.padding = "0.5rem";
+		ratingRow.appendChild(td);
+	}
+	table.appendChild(ratingRow);
+
+	return table;
 }

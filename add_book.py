@@ -292,13 +292,14 @@ def add_book(isbn, proposer, participants, review_date):
     meta = fetch_openlibrary_metadata(isbn, books)
 
     if meta:
-        ratings = {name: None for name in participants}
+        ratings = {
+            name: None for name in [participant.title() for participant in participants]
+        }
 
         new_book = {
             "query": isbn,
             "review_date": review_date,
             "proposer": proposer.title(),
-            "participants": [participant.title() for participant in participants],
             "ratings": ratings,
             "meta": meta,
         }

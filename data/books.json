@@ -2,16 +2,11 @@
   {
     "query": "9781035045686",
     "review_date": "2026-01-08",
-    "proposer": "arne",
-    "participants": [
-      "arne",
-      "thomas",
-      "joost"
-    ],
+    "proposer": "Arne",
     "ratings": {
-      "arne": 5,
-      "thomas": 9,
-      "joost": 6
+      "Arne": 5,
+      "Thomas": 9,
+      "Joost": 6
     },
     "meta": {
       "key": "/works/OL37576633W",
@@ -36,11 +31,6 @@
     "query": "herr der ringe",
     "review_date": "YYYY-MM-DD",
     "proposer": "namehere",
-    "participants": [
-      "namehere",
-      "namehere2",
-      "namehere3"
-    ],
     "ratings": {
       "namehere": null,
       "namehere2": null,
@@ -80,16 +70,11 @@
   {
     "query": "Service Model",
     "review_date": "2025-11-13",
-    "proposer": "arne",
-    "participants": [
-      "arne",
-      "thomas",
-      "joost"
-    ],
+    "proposer": "Arne",
     "ratings": {
-      "arne": null,
-      "thomas": null,
-      "joost": null
+      "Arne": null,
+      "Thomas": null,
+      "Joost": null
     },
     "meta": {
       "key": "/works/OL145191W",
@@ -131,11 +116,6 @@
     "query": "9780316362474",
     "review_date": "YYYY-MM-DD",
     "proposer": "Arne",
-    "participants": [
-      "Arne",
-      "Joost",
-      "Thomas"
-    ],
     "ratings": {
       "Arne": null,
       "Joost": null,

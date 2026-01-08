@@ -51,3 +51,29 @@ p.h2subtitle {
 	display: block;
 	line-height: 1;
 }
+
+.latex-table {
+	border-collapse: collapse;
+	/* no spacing between cells */
+	border-spacing: 0;
+	/* extra safety */
+	width: 100%;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 1rem;
+	margin-bottom: 1.5rem;
+	text-align: center;
+	/* center all cells */
+}
+
+.latex-table th,
+.latex-table td {
+	padding: 0.5rem 1rem;
+	text-align: center;
+	/* center content */
+	border: 0 none !important;
+	/* remove all borders */
+}
+
+.latex-table th {
+	border-bottom: 1px solid black !important;
+}
