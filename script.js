@@ -20,17 +20,24 @@ function renderPage(books) {
 function renderBook(book) {
 	const section = document.createElement("section");
 
+
 	// Title
 	const h2 = document.createElement("h2");
 	h2.textContent = book.meta.title
+	h2.id = book.meta.key
 	section.appendChild(h2);
+
+	const margin_anchor = document.createElement("p")
+	section.appendChild(margin_anchor)
+
 
 	const h2_subtitle = document.createElement("p");
 	h2_subtitle.className = "h2subtitle";
 	h2_subtitle.textContent = `by ${book.meta.authors}`;
 	section.appendChild(h2_subtitle)
-	const margin_anchor = document.createElement("p")
-	section.appendChild(margin_anchor)
+
+
+
 
 	// Right margin book cover 
 	if (book.meta.cover_url) {
@@ -59,7 +66,7 @@ function renderBook(book) {
 		// metaLine("Participants", join(book.participants)),
 		metaLine("First published", book.meta.first_publish_year),
 		metaLine("Edition count", book.meta.edition_count),
-		metaLine("Number of pages", book.meta.number_of_pages_median),
+		metaLine("Pages", book.meta.number_of_pages_median),
 		metaLine("Subjects", book.meta.subjects),
 		metaLine("Places", join(book.meta.place)),
 		metaLine("Time", join(book.meta.time)),

@@ -9,9 +9,9 @@
       "joost"
     ],
     "ratings": {
-      "arne": null,
-      "thomas": null,
-      "joost": null
+      "arne": 5,
+      "thomas": 9,
+      "joost": 6
     },
     "meta": {
       "key": "/works/OL37576633W",
@@ -20,7 +20,7 @@
       "authors": "Adrian Tchaikovsky",
       "first_publish_year": 2024,
       "first_edition": "",
-      "number_of_pages_median": "",
+      "number_of_pages_median": "400",
       "first_sentence": "On activation each morning Charles' first duty was to check his master's travel arrangements for the day.",
       "description": "Task Item No. 1: Become Self-Aware\r\nMeet Charles\u2122, the latest in robot servant technology. Programmed to undertake the most menial household chores, Charles is loyal, efficient and logical to a fault - that is, until a rather large fault causes him to murder his owner. Understandably perplexed, Charles finds himself without a master and, in a society reliant on artificial labour, worthless. Fleeing the household, he enters a world he never knew existed. Here, an age-old human hierarchy is disintegrating, and a robot ecosystem devoted to its well-being is struggling to find a purpose.\r\nCharles must face new challenges, illogical tasks and a cast of irrational characters. He'll discover that all it takes to overcome the limits of your programming is a nudge. But can he help fix the world, or is it too badly broken?",
       "subjects": "Fiction, Science fiction",
@@ -55,12 +55,10 @@
       "first_edition": "",
       "number_of_pages_median": 1193,
       "first_sentence": "When Mr. Bilbo Baggins of Bag End announced that he would shortly be celebrating his eleventy-first birthday with a party of special magnificence, there was much talk and excitement in Hobbiton.",
-      "description": "Originally published from 1954 through 1956, J.R.R. Tolkien's richly complex series ushered in a new age of epic adventure storytelling. A philologist and illustrator who took inspiration from his work, Tolkien invented the modern heroic quest novel from the ground up, creating not just a world, but a domain, not just a lexicon, but a language, that would spawn countless imitators and lead to the inception of the epic fantasy genre. Today, THE LORD OF THE RINGS is considered \"the most influential fantasy novel ever written.\" (THE ENCYCLOPEDIA OF FANTASY)\r\n\r\nDuring his travels across Middle-earth, the hobbit Bilbo Baggins had found the Ring. But the simple band of gold was far from ordinary; it was in fact the One Ring - the greatest of the ancient Rings of Power. Sauron, the Dark Lord, had infused it with his own evil magic, and when it was lost, he was forced to flee into hiding.\r\n\r\nBut now Sauron's exile has ended and his power is spreading anew, fueled by the knowledge that his treasure has been found. He has gathered all the Great Rings to him, and will stop at nothing to reclaim the One that will complete his dominion. The only way to stop him is to cast the Ruling Ring deep into the Fire-Mountain at the heart of the land of Mordor--Sauron's dark realm.\r\n\r\nFate has placed the burden in the hands of Frodo Baggins, Bilbo's heir...and he is resolved to bear it to its end. Or his own. \r\n\r\n\r\n----------\r\n\r\n\r\n**Contains**\r\n\r\n - [The Fellowship of the Ring][1]\r\n - [The Two Towers][2]\r\n - [The Return of the King][3]\r\n - [The Lord of the Rings [2/2]](https://openlibrary.org/works/OL27306128W)\r\n - [The Lord of the Rings [1/6]](https://openlibrary.org/works/OL24170898W)\r\n - [The Lord of the Rings [1/9]](https://openlibrary.org/works/OL27305953W)\r\n - [The Lord of the Rings [2/9]](https://openlibrary.org/works/OL27305892W)\r\n - [The Lord of the Rings [3/9]](https://openlibrary.org/works/OL27306048W)\r\n\r\n\r\n\r\n  [1]: https://openlibrary.org/works/OL14933414W/The_Fellowship_of_the_Ring\r\n  [2]: https://openlibrary.org/works/OL27479W/The_Two_Towers\r\n  [3]: https://openlibrary.org/works/OL27516W/The_Return_of_the_King",
+      "description": "Originally published from 1954 through 1956, J.R.R. Tolkien's richly complex series ushered in a new age of epic adventure storytelling. A philologist and illustrator who took inspiration from his work, Tolkien invented the modern heroic quest novel from the ground up, creating not just a world, but a domain, not just a lexicon, but a language, that would spawn countless imitators and lead to the inception of the epic fantasy genre. Today, THE LORD OF THE RINGS is considered \"the most influential fantasy novel ever written.\" (THE ENCYCLOPEDIA OF FANTASY)\r\n\r\nDuring his travels across Middle-earth, the hobbit Bilbo Baggins had found the Ring. But the simple band of gold was far from ordinary; it was in fact the One Ring - the greatest of the ancient Rings of Power. Sauron, the Dark Lord, had infused it with his own evil magic, and when it was lost, he was forced to flee into hiding.\r\n\r\nBut now Sauron's exile has ended and his power is spreading anew, fueled by the knowledge that his treasure has been found. He has gathered all the Great Rings to him, and will stop at nothing to reclaim the One that will complete his dominion. The only way to stop him is to cast the Ruling Ring deep into the Fire-Mountain at the heart of the land of Mordor--Sauron's dark realm.\r\n\r\nFate has placed the burden in the hands of Frodo Baggins, Bilbo's heir...and he is resolved to bear it to its end. Or his own.",
       "subjects": "Fiction, Fantasy, Epic, Romans, Nouvelles",
       "edition_count": 251,
       "id_wikidata": [
-        "Q22122681",
-        "Q121942951",
         "Q22122681"
       ],
       "place": [
