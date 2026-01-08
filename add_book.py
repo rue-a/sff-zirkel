@@ -16,6 +16,77 @@ WARNINGS = []
 
 OPEN_LIBRARY_URL = "https://openlibrary.org"
 LIMIT = 10
+
+BOOK_GENRES = [
+    # Fiction
+    "Literary Fiction",
+    "Contemporary Fiction",
+    "Historical Fiction",
+    "Science Fiction",
+    "Fantasy",
+    "High Fantasy",
+    "Urban Fantasy",
+    "Dystopian",
+    "Alternate History",
+    "Speculative Fiction",
+    "Mystery",
+    "Crime Fiction",
+    "Detective Fiction",
+    "Thriller",
+    "Psychological Thriller",
+    "Romance",
+    "Historical Romance",
+    "Paranormal Romance",
+    "Horror",
+    "Gothic Fiction",
+    "Adventure",
+    "Action",
+    "War Fiction",
+    "Western",
+    "Short Stories",
+    "Young Adult",
+    "Middle Grade",
+    "Children's Fiction",
+    # Nonfiction
+    "Biography",
+    "Autobiography",
+    "Memoir",
+    "History",
+    "World History",
+    "Philosophy",
+    "Religion",
+    "Spirituality",
+    "Science",
+    "Popular Science",
+    "Mathematics",
+    "Computer Science",
+    "Technology",
+    "Politics",
+    "Political Science",
+    "Law",
+    "Economics",
+    "Psychology",
+    "Self-Help",
+    "Education",
+    "Art",
+    "Music",
+    "Film Studies",
+    "Literary Criticism",
+    "Language",
+    "Travel",
+    "Cooking",
+    "Nature",
+    "Sports",
+    # Cross-genre / Common Tags
+    "Essays",
+    "Humor",
+    "Satire",
+    "Mythology",
+    "Folklore",
+    "Fairy Tales",
+    "Classics",
+]
+
 # -----------------------------------
 
 
@@ -145,7 +216,13 @@ def fetch_openlibrary_metadata(query: str, books: list) -> dict:
         "number_of_pages_median": response_data.get("number_of_pages_median", ""),
         "first_sentence": response_data.get("first_sentence", [""])[0],
         "description": response_data.get("description", ""),
-        "subjects": ", ".join(response_data.get("subject", [""])),
+        "subjects": ", ".join(
+            [
+                genre
+                for genre in response_data.get("subject", [""])
+                if genre in BOOK_GENRES
+            ]
+        ),
         "edition_count": response_data.get("edition_count", ""),
         "id_wikidata": response_data.get("id_wikidata", ""),
         "place": response_data.get("place", ""),
