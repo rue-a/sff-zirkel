@@ -356,7 +356,7 @@ def build_summary(
         for key, val in meta.items():
             lines.append(f"**{key}:** {val}")
 
-        lines.append("### Manually Added Data")
+        lines.append("### Review Data")
         if review_date:
             lines.append(f"**Review date:** {review_date}")
 
