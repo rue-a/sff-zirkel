@@ -139,5 +139,35 @@
       "cover_path": "covers/9252364.jpg",
       "cover_url": "https://covers.openlibrary.org/b/id/9252364-M.jpg"
     }
+  },
+  {
+    "query": "9780553293357",
+    "review_date": "YYYY-MM-DD",
+    "proposer": "Arne",
+    "ratings": {
+      "Member1": null,
+      "Member2": null,
+      "Member3": null
+    },
+    "meta": {
+      "key": "/works/OL46125W",
+      "type": "work",
+      "title": "Foundation",
+      "authors": "Isaac Asimov",
+      "first_publish_year": 1951,
+      "first_edition": "",
+      "number_of_pages_median": 240,
+      "first_sentence": "HARI SELDON ... born in the 11,988th year of the Galactic Era: died 12,069.",
+      "description": "One of the great masterworks of science fiction, the Foundation novels of Isaac Asimov are unsurpassed for their unique blend of nonstop action, daring ideas, and extensive world-building. \r\n\r\nThe story of our future begins with the history of Foundation and its greatest psychohistorian: Hari Seldon.  For twelve thousand years the Galactic Empire has ruled supreme. Now it is dying.  Only Hari Seldon, creator of the revolutionary science of psychohistory, can see into the future--a dark age of ignorance, barbarism, and warfare that will last thirty thousand years. To preserve knowledge and save mankind, Seldon gathers the best minds in the Empire--both scientists and scholars--and brings them to a bleak planet at the edge of the Galaxy to serve as a beacon of hope for future generations. He calls his sanctuary the Foundation.\r\n\r\nBut soon the fledgling Foundation finds itself at the mercy of corrupt warlords rising in the wake of the receding Empire. And mankind's last best hope is faced with an agonizing choice: submit to the barbarians and live as slaves--or take a stand for freedom and risk total destruction.",
+      "subjects": "Fiction, Science Fiction",
+      "edition_count": 97,
+      "id_wikidata": [
+        "Q121267668"
+      ],
+      "place": "",
+      "time": "",
+      "cover_path": "covers/14612610.jpg",
+      "cover_url": "https://covers.openlibrary.org/b/id/14612610-M.jpg"
+    }
   }
 ]
