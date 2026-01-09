@@ -55,7 +55,7 @@ p.h2subtitle {
 /* for centering things horizontally */
 .center {
 	margin-left: auto;
-	margin-right: auto;
+	margin-right: 0;
 }
 
 .latex-table {
@@ -65,7 +65,7 @@ p.h2subtitle {
 	/* extra safety */
 	width: 80%;
 
-	font-family: "Times New Roman", Times, serif;
+
 	font-size: 1rem;
 	margin-bottom: 1.5rem;
 	text-align: center;
@@ -74,13 +74,14 @@ p.h2subtitle {
 
 .latex-table th,
 .latex-table td {
-	padding: 0.5rem 1rem;
+	padding: 0.2rem 0.4rem;
+	/* reduced padding */
 	text-align: center;
 	/* center content */
-	border: 0 none !important;
+	/* border: 0 none !important; */
 	/* remove all borders */
 }
 
 .latex-table th {
-	border-bottom: 1px solid black !important;
+	/* border-bottom: 1px solid #111; */
 }

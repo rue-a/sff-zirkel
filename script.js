@@ -1,11 +1,17 @@
-fetch("data/books.json")
-	.then(r => r.json())
-	.then(renderPage);
+Promise.all([
+	fetch("data/club.json").then(r => r.json()),
+	fetch("data/books.json").then(r => r.json())
+])
+	.then(([club, books]) => {
+		console.log("Club:", club);
+		renderPage(club, books);
+	});
 
-function renderPage(books) {
+function renderPage(club, books) {
 	const header = document.getElementById("header")
 
 
+	document.title = club.name
 	const title = document.createElement("span")
 	title.className = "h1"
 	title.textContent = document.title
@@ -13,11 +19,11 @@ function renderPage(books) {
 
 	const article = document.getElementById("works");
 	books.forEach(book => {
-		article.appendChild(renderBook(book));
+		article.appendChild(renderBook(book, club));
 	});
 }
 
-function renderBook(book) {
+function renderBook(book, club) {
 	console.log(`Printing book section for ${book.meta.title}`)
 
 	const section = document.createElement("section");
@@ -114,20 +120,71 @@ function renderBook(book) {
 		section.appendChild(desc);
 	}
 
+	// book review announcement
+	const now = new Date();
+	const review_date = new Date(book["review_date"])
+	const review_date_string = review_date.toLocaleDateString('en', { month: 'short', day: 'numeric', year: 'numeric' });
+
+
+
+	if (review_date > now) {
+		const review_announcement_p = document.createElement("p")
+		review_announcement_p.textContent = `${book.meta.title} will be reviewed on ${review_date_string}.`;
+		section.appendChild(review_announcement_p)
+	}
+
+
 
 	// Ratings
 
-	const ratings_table = createRatingsTable(book.ratings, book.meta.title)
-	if (ratings_table) {
-		const ratings_title = document.createElement("h3")
-		ratings_title.textContent = "Ratings"
-		ratings_title.className = "center"
+	// const ratings_table = createRatingsTable(book.ratings, book.meta.title)
+	// if (ratings_table) {
 
-		section.appendChild(ratings_title)
-		const ratings_table_holder = document.createElement("p")
-		ratings_table_holder.appendChild(ratings_table)
-		section.appendChild(ratings_table_holder)
+
+	// 	const ratings_title = document.createElement("h3")
+	// 	ratings_title.textContent = "Ratings"
+	// 	// ratings_title.className = "center"
+	// 	section.appendChild(ratings_title)
+
+	// 	if (review_date <= now) {
+	// 		const average_rating = Math.round(Object.values(book.ratings).reduce((acc, val) => acc + val, 0) / Object.values(book.ratings).length * 10) / 10
+
+	// 		review_announcement_p.textContent = `On ${review_date_string} ${book.meta.title} was rated by the ${club.name} with an average of ${average_rating} out of 10 points.`;
+	// 		section.appendChild(review_announcement_p)
+	// 	}
+
+	// 	const ratings_table_holder = document.createElement("p")
+	// 	ratings_table.classList.add("center")
+	// 	ratings_table_holder.appendChild(ratings_table)
+	// 	section.appendChild(ratings_table_holder)
+
+
+	// }
+
+
+
+
+	if (checkRatings(book.ratings, book.meta.title)) {
+
+
+		if (review_date <= now) {
+
+
+			const ratings_title = document.createElement("h3")
+			ratings_title.textContent = "Ratings"
+			section.appendChild(ratings_title)
+
+			const average_rating = Math.round(Object.values(book.ratings).reduce((acc, val) => acc + val, 0) / Object.values(book.ratings).length * 10) / 10
+			const margin_ratings = createMarginRatings(book.ratings)
+			console.log(margin_ratings)
+			const review_p = document.createElement("p")
+
+			review_p.innerHTML = `${margin_ratings.outerHTML} On ${review_date_string} ${book.meta.title} was rated by the ${club.name} with an average of ${average_rating} out of 10 points.`;
+			// review_p.appendChild(margin_ratings);
+			section.appendChild(review_p)
+		}
 	}
+
 
 
 
@@ -144,14 +201,7 @@ function join(v) {
 }
 
 
-
-function createRatingsTable(ratings, title) {
-	/**
- * Creates an HTML table for given ratings.
- * @param {Object} ratings - Object where keys are raters and values are ratings
- * @returns {HTMLTableElement|null} - Table element if ratings exist, otherwise null
- */
-
+function checkRatings(ratings, title) {
 	// check for ratings object with content
 	if (!ratings || Object.keys(ratings).length === 0) {
 		console.warn(`No ratings found (${title}).`)
@@ -171,10 +221,28 @@ function createRatingsTable(ratings, title) {
 		}
 
 	}
+	return true
+}
+
+
+function createRatingsTable(ratings, title) {
+	/**
+ * Creates an HTML table for given ratings.
+ * @param {Object} ratings - Object where keys are raters and values are ratings
+ * @returns {HTMLTableElement|null} - Table element if ratings exist, otherwise null
+ */
+
+
+
+
+
+	// const average_rating = Math.round(Object.values(ratings).reduce((acc, val) => acc + val, 0) / Object.values(ratings).length * 10) / 10
+
+	// ratings['Average'] = average_rating;
 
 	const table = document.createElement("table");
 
-	table.className = "latex-table center"
+	table.className = "latex-table"
 	table.style.borderCollapse = "collapse";
 	table.style.marginBottom = "1rem";
 
@@ -183,8 +251,6 @@ function createRatingsTable(ratings, title) {
 	for (const rater in ratings) {
 		const th = document.createElement("th");
 		th.innerText = rater;
-		th.style.border = "1px solid #ccc";
-		th.style.padding = "0.5rem";
 		headerRow.appendChild(th);
 	}
 	table.appendChild(headerRow);
@@ -194,11 +260,25 @@ function createRatingsTable(ratings, title) {
 	for (const rater in ratings) {
 		const td = document.createElement("td");
 		td.innerText = ratings[rater];
-		td.style.border = "1px solid #ccc";
-		td.style.padding = "0.5rem";
 		ratingRow.appendChild(td);
 	}
 	table.appendChild(ratingRow);
 
 	return table;
+}
+
+
+function createMarginRatings(ratings) {
+
+	const margin_ratings = document.createElement("span")
+	margin_ratings.className = "marginnote";
+
+	const metalines = [];
+	for (let key of Object.keys(ratings)) {
+		metalines.push(metaLine(key, ratings[key]));
+	}
+
+	margin_ratings.innerHTML = metalines.join("");
+	return margin_ratings;
+
 }
