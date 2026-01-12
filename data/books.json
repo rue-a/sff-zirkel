@@ -169,5 +169,33 @@
       "cover_path": "covers/14612610.jpg",
       "cover_url": "https://covers.openlibrary.org/b/id/14612610-M.jpg"
     }
+  },
+  {
+    "query": "The Blacktongued Thief",
+    "review_date": "YYYY-MM-DD",
+    "proposer": "Namehere",
+    "ratings": {
+      "Member1": null,
+      "Member2": null,
+      "Member3": null
+    },
+    "meta": {
+      "key": "/works/OL21698532W",
+      "type": "work",
+      "title": "Blacktongue Thief",
+      "authors": "Christopher Buehlman",
+      "first_publish_year": 2021,
+      "first_edition": "",
+      "number_of_pages_median": 416,
+      "first_sentence": "",
+      "description": "",
+      "subjects": "",
+      "edition_count": 7,
+      "id_wikidata": [],
+      "place": "",
+      "time": "",
+      "cover_path": "covers/10622593.jpg",
+      "cover_url": "https://covers.openlibrary.org/b/id/10622593-M.jpg"
+    }
   }
 ]
