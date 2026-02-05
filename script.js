@@ -2,15 +2,20 @@ Promise.all([
 	fetch("data/club.json").then(r => r.json()),
 	fetch("data/books.json").then(r => r.json())
 ])
-	.then(([club, books]) => {
-		console.log("Club:", club);
-		renderPage(club, books);
+	.then(async ([club, books]) => {
+		const popupRatings = await fetch(club.rating_popup).then(r => r.text());
+		renderPage(club, books, popupRatings);
 	});
 
-function renderPage(club, books) {
+function renderPage(club, books, popupRatings) {
+	const popupHost = document.createElement("div");
+	popupHost.innerHTML = popupRatings;
+	const gradingPopup = popupHost.firstElementChild;
+	gradingPopup.hidden = true;
+	gradingPopup.style.position = "absolute";
+	document.body.appendChild(gradingPopup);
+
 	const header = document.getElementById("header")
-
-
 	document.title = club.name
 	const title = document.createElement("span")
 	title.className = "h1"
@@ -19,11 +24,13 @@ function renderPage(club, books) {
 
 	const article = document.getElementById("works");
 	books.forEach(book => {
-		article.appendChild(renderBook(book, club));
+		article.appendChild(renderBook(book, club, gradingPopup));
 	});
+
+
 }
 
-function renderBook(book, club) {
+function renderBook(book, club, gradingPopup) {
 	console.log(`Printing book section for ${book.meta.title}`)
 
 	const section = document.createElement("section");
@@ -135,55 +142,85 @@ function renderBook(book, club) {
 
 
 
-	// Ratings
-
-	// const ratings_table = createRatingsTable(book.ratings, book.meta.title)
-	// if (ratings_table) {
-
-
-	// 	const ratings_title = document.createElement("h3")
-	// 	ratings_title.textContent = "Ratings"
-	// 	// ratings_title.className = "center"
-	// 	section.appendChild(ratings_title)
-
-	// 	if (review_date <= now) {
-	// 		const average_rating = Math.round(Object.values(book.ratings).reduce((acc, val) => acc + val, 0) / Object.values(book.ratings).length * 10) / 10
-
-	// 		review_announcement_p.textContent = `On ${review_date_string} ${book.meta.title} was rated by the ${club.name} with an average of ${average_rating} out of 10 points.`;
-	// 		section.appendChild(review_announcement_p)
-	// 	}
-
-	// 	const ratings_table_holder = document.createElement("p")
-	// 	ratings_table.classList.add("center")
-	// 	ratings_table_holder.appendChild(ratings_table)
-	// 	section.appendChild(ratings_table_holder)
-
-
-	// }
-
-
-
 
 	if (checkRatings(book.ratings, book.meta.title)) {
-
-
 		if (review_date <= now) {
+			const ratings_title = document.createElement("h3");
+			ratings_title.textContent = "Ratings";
+
+			// Create hover question mark
+			const popupTrigger = document.createElement("span");
+			popupTrigger.innerHTML = '<sup class=popup-symbol>?</sup>';
+			popupTrigger.className = "popup-trigger";
+			popupTrigger.style.cursor = "help";
+			popupTrigger.style.marginLeft = "6px";
+
+			ratings_title.appendChild(popupTrigger);
+			section.appendChild(ratings_title);
+
+			// Hover behavior
+			popupTrigger.addEventListener("mouseenter", () => {
+				const spacing = 6;
+
+				// Make popup visible but hidden so size can be measured
+				gradingPopup.style.visibility = "hidden";
+				gradingPopup.style.display = "block";
+
+				const rect = popupTrigger.getBoundingClientRect();
+				const popupRect = gradingPopup.getBoundingClientRect();
+
+				let top = rect.bottom + spacing + window.scrollY; // default below
+				let left = rect.left + window.scrollX;
+
+				// If popup overflows bottom of viewport, place it above
+				if (top + popupRect.height > window.scrollY + window.innerHeight) {
+					top = rect.top - popupRect.height - spacing + window.scrollY;
+				}
+
+				// If popup overflows right edge, shift left
+				if (left + popupRect.width > window.scrollX + window.innerWidth) {
+					left = window.scrollX + window.innerWidth - popupRect.width - spacing;
+				}
+
+				if (left < window.scrollX) {
+					left = window.scrollX + spacing;
+				}
+
+				gradingPopup.style.top = `${top}px`;
+				gradingPopup.style.left = `${left}px`;
+
+				// Now show it properly
+				gradingPopup.style.visibility = "visible";
+			});
 
 
-			const ratings_title = document.createElement("h3")
-			ratings_title.textContent = "Ratings"
-			section.appendChild(ratings_title)
+			popupTrigger.addEventListener("mouseleave", () => {
+				// delay hiding to allow moving into popup
+				setTimeout(() => {
+					if (!gradingPopup.matches(':hover')) {
+						gradingPopup.style.display = "none";
+					}
+				}, 100);
+			});
 
-			const average_rating = Math.round(Object.values(book.ratings).reduce((acc, val) => acc + val, 0) / Object.values(book.ratings).length * 10) / 10
-			const margin_ratings = createMarginRatings(book.ratings)
-			console.log(margin_ratings)
-			const review_p = document.createElement("p")
+			gradingPopup.addEventListener("mouseleave", () => {
+				gradingPopup.style.display = "none";
+			});
 
+			// Average rating
+			const average_rating =
+				Math.round(
+					Object.values(book.ratings).reduce((acc, val) => acc + val, 0) /
+					Object.values(book.ratings).length * 10
+				) / 10;
+
+			const margin_ratings = createMarginRatings(book.ratings);
+			const review_p = document.createElement("p");
 			review_p.innerHTML = `${margin_ratings.outerHTML} On ${review_date_string} ${book.meta.title} was rated by the ${club.name} with an average of ${average_rating} out of 10 points.`;
-			// review_p.appendChild(margin_ratings);
-			section.appendChild(review_p)
+			section.appendChild(review_p);
 		}
 	}
+
 
 
 
@@ -224,48 +261,6 @@ function checkRatings(ratings, title) {
 	return true
 }
 
-
-function createRatingsTable(ratings, title) {
-	/**
- * Creates an HTML table for given ratings.
- * @param {Object} ratings - Object where keys are raters and values are ratings
- * @returns {HTMLTableElement|null} - Table element if ratings exist, otherwise null
- */
-
-
-
-
-
-	// const average_rating = Math.round(Object.values(ratings).reduce((acc, val) => acc + val, 0) / Object.values(ratings).length * 10) / 10
-
-	// ratings['Average'] = average_rating;
-
-	const table = document.createElement("table");
-
-	table.className = "latex-table"
-	table.style.borderCollapse = "collapse";
-	table.style.marginBottom = "1rem";
-
-	// First row: rater names
-	const headerRow = document.createElement("tr");
-	for (const rater in ratings) {
-		const th = document.createElement("th");
-		th.innerText = rater;
-		headerRow.appendChild(th);
-	}
-	table.appendChild(headerRow);
-
-	// Second row: ratings
-	const ratingRow = document.createElement("tr");
-	for (const rater in ratings) {
-		const td = document.createElement("td");
-		td.innerText = ratings[rater];
-		ratingRow.appendChild(td);
-	}
-	table.appendChild(ratingRow);
-
-	return table;
-}
 
 
 function createMarginRatings(ratings) {

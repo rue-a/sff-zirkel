@@ -19,4 +19,4 @@ Upon finding a valid **ISBN**, opening this issue will generate a new database e
 
 - review date: `YYYY-MM-DD`
 - proposer: `namehere`
-- guests: `namehere, namehere2, namehere3` (guests are participants that are not permanent members, see `data/club.json` for a list of permanent members)
+- guests: `namehere, namehere, namehere` (guests are participants that are not permanent members, see `data/club.json` for a list of permanent members)

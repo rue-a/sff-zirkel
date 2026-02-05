@@ -305,11 +305,17 @@ def add_book(isbn, proposer, participants, review_date):
             name: None for name in [participant.title() for participant in participants]
         }
 
+        reviews = {
+            name: None for name in [participant.title() for participant in participants]
+        }
+
+
         new_book = {
             "query": isbn,
             "review_date": review_date,
             "proposer": proposer.title(),
             "ratings": ratings,
+            "reviews": reviews,
             "meta": meta,
         }
 
@@ -470,7 +476,7 @@ def parse_issue():
     defaults = {
         "review date": "YYYY-MM-DD",
         "proposer": "namehere",
-        "guests": "namehere, namehere2, namehere3",
+        "guests": "namehere, namehere, namehere",
     }
 
     if review_date == defaults["review date"]:

@@ -1,0 +1,9 @@
+{
+	"name": "Book Club Name",
+	"permanent_members": [
+		"Member1",
+		"Member2",
+		"Member3"
+	],
+	"founding_date": "YYYY-MM-DD"
+}
