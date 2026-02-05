@@ -6,7 +6,12 @@
     "ratings": {
       "Arne": 13,
       "Thomas": 11,
-      "Joost": 14
+      "Joost": 15
+    },
+    "reviews": {
+      "Arne": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis partu",
+      "Thomas": "eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit ve",
+      "Joost": null
     },
     "meta": {
       "key": "/works/OL37576633W",
@@ -18,7 +23,7 @@
       "number_of_pages_median": "400",
       "first_sentence": "On activation each morning Charles' first duty was to check his master's travel arrangements for the day.",
       "description": "Task Item No. 1: Become Self-Aware\r\nMeet Charles\u2122, the latest in robot servant technology. Programmed to undertake the most menial household chores, Charles is loyal, efficient and logical to a fault - that is, until a rather large fault causes him to murder his owner. Understandably perplexed, Charles finds himself without a master and, in a society reliant on artificial labour, worthless. Fleeing the household, he enters a world he never knew existed. Here, an age-old human hierarchy is disintegrating, and a robot ecosystem devoted to its well-being is struggling to find a purpose.\r\nCharles must face new challenges, illogical tasks and a cast of irrational characters. He'll discover that all it takes to overcome the limits of your programming is a nudge. But can he help fix the world, or is it too badly broken?",
-      "subjects": "Fiction, Science fiction",
+      "subjects": "Science fiction",
       "edition_count": 5,
       "id_wikidata": [],
       "place": "",
@@ -29,12 +34,17 @@
   },
   {
     "query": "The Blacktongued Thief",
-    "review_date": "YYYY-MM-DD",
-    "proposer": "Namehere",
+    "review_date": "2026-02-11",
+    "proposer": "Arne",
     "ratings": {
-      "Member1": 8,
-      "Member2": 6,
-      "Member3": 3
+      "Arne": 8,
+      "Thomas": 6,
+      "Joost": 3
+    },
+    "reviews": {
+      "Arne": null,
+      "Thomas": null,
+      "Joost": null
     },
     "meta": {
       "key": "/works/OL21698532W",
@@ -44,9 +54,9 @@
       "first_publish_year": 2021,
       "first_edition": "",
       "number_of_pages_median": 416,
-      "first_sentence": "",
-      "description": "",
-      "subjects": "",
+      "first_sentence": "I was about to die.",
+      "description": "Kinch Na Shannack owes the Takers Guild a small fortune for his education as a thief, which includes (but is not limited to) lock-picking, knife-fighting, wall-scaling, fall-breaking, lie-weaving, trap-making, plus a few small magics. His debt has driven him to lie in wait by the old forest road, planning to rob the next traveler that crosses his path.\n\nBut today, Kinch Na Shannack has picked the wrong mark.\n\nGalva is a knight, a survivor of the brutal goblin wars, and handmaiden of the goddess of death. She is searching for her queen, missing since a distant northern city fell to giants.\n\nUnsuccessful in his robbery and lucky to escape with his life, Kinch now finds his fate entangled with Galva's. Common enemies and uncommon dangers force thief and knight on an epic journey where goblins hunger for human flesh, krakens hunt in dark waters, and honor is a luxury few can afford.",
+      "subjects": "Fantasy, Grimlight, Gritty",
       "edition_count": 7,
       "id_wikidata": [],
       "place": "",
