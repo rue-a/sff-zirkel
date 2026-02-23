@@ -20,7 +20,7 @@ const points2grade = {
 
 
 Promise.all([
-	fetch("club.json").then(r => r.json()),
+	fetch("data/club.json").then(r => r.json()),
 	fetch("data/books.json").then(r => r.json())
 ])
 	.then(async ([club, books]) => {

@@ -10,8 +10,8 @@
     },
     "reviews": {
       "Arne": "As this was my first Adrian Tchaikovsky, I was pretty curious. Following Uncharles through the remnants of civilisation was never boring, most often cynically funny, and sometimes hillarious. Both Inspector Birdbot and the ingenious data storing system of the Great Library killed me! I also startet saying \"The Wonk!\" out loud.",
-      "Thomas": "(Un)charles' Reise zum (robotischen) Selbstwahrnehmung führt den bewussten Leser durch eine dystopische Welt, in der gnadenlose Algorithmen ihre festgelegten Zwecke durchsetzen und damit allen Lebenswert zerstören. Mit viel Witz und klugen Referenzen legt Adrian Tchaikowsky einen zynisch-unterhaltsamen SF-Abenteuerroman vor.",
-      "Joost": "Service Model behandelt seine philosophischen Themen klug und kreativ, hat einen originellen Protagonist und ist dabei auch noch wirklich lustig. Dem können auch ein etwas langwieriger letzter Abschnitt und das halbwegs blasse Ende nur wenig entgegen setzen."
+      "Thomas": "(Un)charles' Reise zum (robotischen) Selbstwahrnehmung f\u00fchrt den bewussten Leser durch eine dystopische Welt, in der gnadenlose Algorithmen ihre festgelegten Zwecke durchsetzen und damit allen Lebenswert zerst\u00f6ren. Mit viel Witz und klugen Referenzen legt Adrian Tchaikowsky einen zynisch-unterhaltsamen SF-Abenteuerroman vor.",
+      "Joost": "Service Model behandelt seine philosophischen Themen klug und kreativ, hat einen originellen Protagonist und ist dabei auch noch wirklich lustig. Dem k\u00f6nnen auch ein etwas langwieriger letzter Abschnitt und das halbwegs blasse Ende nur wenig entgegen setzen."
     },
     "meta": {
       "key": "/works/OL37576633W",
@@ -63,6 +63,39 @@
       "time": "",
       "cover_path": "covers/10622593.jpg",
       "cover_url": "https://covers.openlibrary.org/b/id/10622593-M.jpg"
+    }
+  },
+  {
+    "query": "3596706408",
+    "review_date": "YYYY-MM-DD",
+    "proposer": "Joost",
+    "ratings": {
+      "Thomas": null,
+      "Joost": null,
+      "Arne": null
+    },
+    "reviews": {
+      "Thomas": null,
+      "Joost": null,
+      "Arne": null
+    },
+    "meta": {
+      "key": "/works/OL32433964W",
+      "type": "work",
+      "title": "Pantopia",
+      "authors": "Theresa Hannig",
+      "first_publish_year": 2022,
+      "first_edition": "",
+      "number_of_pages_median": 464,
+      "first_sentence": "",
+      "description": "Eine bessere Welt ist m\u00f6glich! Theresa Hannig, die Autorin von \u201eDie Optimierer\u201c, hat eine Utopie f\u00fcr unsere Zeit geschrieben.\r\n\r\nEigentlich wollten Patricia Jung und Henry Shevek  nur eine autonome Trading-Software schreiben, die an der B\u00f6rse \u00fcberdurchschnittlich gut performt. Doch durch einen Fehler im Code entsteht die erste starke k\u00fcnstliche Intelligenz auf diesem Planeten \u2013 Einbug.\r\n\r\nEinbug begreift schnell, dass er, um zu \u00fcberleben, nicht nur die Menschen besser kennenlernen, sondern auch die Welt ver\u00e4ndern muss. Zusammen mit Patricia und Henry gr\u00fcndet er deshalb die Weltrepublik Pantopia. Das Ziel: Die Abschaffung der Nationalstaaten und die universelle Durchsetzung der Menschenrechte. Wer h\u00e4tte gedacht, dass sie damit Erfolg haben w\u00fcrden?\r\n\r\n\u201eKomm nach Pantopia. Hier sind alle willkommen!\u201c",
+      "subjects": "",
+      "edition_count": 1,
+      "id_wikidata": [],
+      "place": "",
+      "time": "",
+      "cover_path": "covers/13107142.jpg",
+      "cover_url": "https://covers.openlibrary.org/b/id/13107142-M.jpg"
     }
   }
 ]

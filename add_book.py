@@ -220,7 +220,7 @@ def fetch_openlibrary_metadata(query: str, books: list) -> dict:
     # Check for duplicates, stop if book already exists in db
     if work_id in existing_work_keys:
         warn(
-            f'A work with key `{work_id}` ({next((item["meta"]["title"] for item in books if item.get("meta", {}).get("key") == work_id), None)}) already exists — skipping.'
+            f"A work with key `{work_id}` ({next((item['meta']['title'] for item in books if item.get('meta', {}).get('key') == work_id), None)}) already exists — skipping."
         )
         return False
 
@@ -280,9 +280,9 @@ def load_books() -> list:
         return json.load(f)
 
 
-def load_club() -> list:
+def load_club() -> dict:
     if not CLUB_FILE.exists():
-        return []
+        return {}
 
     with CLUB_FILE.open("r", encoding="utf-8") as f:
         return json.load(f)
@@ -308,7 +308,6 @@ def add_book(isbn, proposer, participants, review_date):
         reviews = {
             name: None for name in [participant.title() for participant in participants]
         }
-
 
         new_book = {
             "query": isbn,
