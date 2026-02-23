@@ -272,7 +272,7 @@ def join_and(xs, oxford=True):
     return ", ".join(xs[:-1]) + sep + xs[-1]
 
 
-def load_books() -> list:
+def load_books() -> dict:
     if not BOOKS_FILE.exists():
         return []
 
