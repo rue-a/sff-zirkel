@@ -280,9 +280,9 @@ def load_books() -> dict:
         return json.load(f)
 
 
-def load_club() -> list:
+def load_club() -> dict:
     if not CLUB_FILE.exists():
-        return []
+        return {}
 
     with CLUB_FILE.open("r", encoding="utf-8") as f:
         return json.load(f)
