@@ -1,11 +1,8 @@
 # %%
 import json
-import re
 import os
-from datetime import datetime
 from pathlib import Path
 
-import requests
 
 from utilities import (
     notice,
@@ -13,7 +10,6 @@ from utilities import (
     join_and,
     extract_field,
     load_books,
-    load_club,
     save_books,
     post_issue_comment,
 )
@@ -26,42 +22,12 @@ NOTICES = []
 WARNINGS = []
 
 
-def add_book(isbn, proposer, participants, review_date):
-    books = load_books(BOOKS_FILE)
-
-    # Fetch metadata to validate ISBN exists
-    meta = fetch_openlibrary_metadata(isbn, books)
-
-    if meta:
-        ratings = {
-            name: None for name in [participant.title() for participant in participants]
-        }
-
-        reviews = {
-            name: None for name in [participant.title() for participant in participants]
-        }
-
-        new_book = {
-            "query": isbn,
-            "review_date": review_date,
-            "proposer": proposer.title(),
-            "ratings": ratings,
-            "reviews": reviews,
-            "meta": meta,
-        }
-
-        books.append(new_book)
-        save_books(BOOKS_FILE, books)
-        print(f"✔ Added book {isbn}")
-    return meta
-
-
 def build_summary(
     *,
-    query: str,
-    review_date: str,
-    proposer: str,
-    participants: list[str],
+    book_id: str,
+    reviewer: str,
+    grade: str,
+    review: list[str],
     meta: dict | None,
     warnings: list[str],
     notices: list[str],
@@ -71,37 +37,11 @@ def build_summary(
     including warnings (if any).
     """
 
-    prepared = requests.Request(
-        "GET", f"{OPEN_LIBRARY_URL}/search.json", params={"q": query, "limit": LIMIT}
-    ).prepare()
-    query_url = prepared.url
-
     lines = ["# SUMMARY"]
-    lines.append(f"**Query:** {query} ({query_url})\n\n")
-
-    if not meta:
-        lines.append("❌ **No book entry created**\n")
-    else:
-        # Header
-        lines.append("✅ **Book entry created**\n")
-
-        # Core info
-
-        lines.append("## Metadata")
-        lines.append("### Fetched Data")
-
-        for key, val in meta.items():
-            lines.append(f"**{key}:** {val}")
-
-        lines.append("### Review Data")
-        if review_date:
-            lines.append(f"**Review date:** {review_date}")
-
-        if proposer:
-            lines.append(f"**Proposed by:** {proposer}")
-
-        if participants:
-            lines.append(f"**Participants:** {', '.join(participants)}")
+    lines.append(f"book id: {book_id}")
+    lines.append(f"reviewer: {reviewer}")
+    lines.append(f"grade: {grade}")
+    lines.append(f"review: {review}")
 
     # Warnings section
     if warnings:
@@ -179,7 +119,7 @@ def parse_issue():
         )
         failed = True
 
-    if not isinstance(grade, (int)) or 1 <= grade <= 15:
+    if not isinstance(int(grade), (int)) or 1 <= grade <= 15:
         WARNINGS.append(warn(f"Grade '{grade}' is not an integer between 1 and 15."))
         failed = True
 
