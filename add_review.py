@@ -119,7 +119,7 @@ def parse_issue():
         )
         failed = True
 
-    if not isinstance(int(grade), (int)) or 1 <= grade <= 15:
+    if not isinstance(int(grade), (int)) or 1 <= int(grade) <= 15:
         WARNINGS.append(warn(f"Grade '{grade}' is not an integer between 1 and 15."))
         failed = True
 
