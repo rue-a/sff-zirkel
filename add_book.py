@@ -265,7 +265,6 @@ def add_book(isbn, proposer, participants, review_date):
     meta = fetch_openlibrary_metadata(isbn, books)
 
     if meta:
-        book_id = uuid.uuid4()
         ratings = {
             name: None for name in [participant.title() for participant in participants]
         }
@@ -275,7 +274,6 @@ def add_book(isbn, proposer, participants, review_date):
         }
 
         new_book = {
-            "id": book_id,
             "query": isbn,
             "review_date": review_date,
             "proposer": proposer.title(),
@@ -284,7 +282,8 @@ def add_book(isbn, proposer, participants, review_date):
             "meta": meta,
         }
 
-        books[book_id] = new_book
+        # reuse Open Library work key as ID
+        books[meta["key"].split("/")[1]] = new_book
         save_books(BOOKS_FILE, books)
         print(f"✔ Added book {isbn}")
     return meta
