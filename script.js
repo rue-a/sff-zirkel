@@ -25,7 +25,7 @@ Promise.all([
 ])
 	.then(async ([club, books]) => {
 		const popupRatings = await fetch(club.rating_popup).then(r => r.text());
-		renderPage(club, books, popupRatings);
+		renderPage(club, Object.values(books), popupRatings);
 	});
 
 function renderPage(club, books, popupRatings) {
