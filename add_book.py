@@ -146,8 +146,8 @@ def download_cover(url: str, out_path: Path):
 
 def fetch_openlibrary_metadata(query: str, books: dict) -> dict:
 
-    existing_queries = [book["query"] for book in books.values]
-    existing_work_keys = [book["meta"]["key"] for book in books.values]
+    existing_queries = [book["query"] for book in books.values()]
+    existing_work_keys = [book["meta"]["key"] for book in books.values()]
 
     # %%
     fields = [
@@ -212,7 +212,7 @@ def fetch_openlibrary_metadata(query: str, books: dict) -> dict:
     if work_id in existing_work_keys:
         WARNINGS.append(
             warn(
-                f"A work with key `{work_id}` ({next(((item['meta']['title'], item['id']) for item in books.values if item.get('meta', {}).get('key') == work_id), None)}) already exists — skipping."
+                f"A work with key `{work_id}` ({next(((item['meta']['title'], item['id']) for item in books.values() if item.get('meta', {}).get('key') == work_id), None)}) already exists — skipping."
             )
         )
         return False
