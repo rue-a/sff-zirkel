@@ -44,9 +44,9 @@
       "Joost": 10
     },
     "reviews": {
-      "Arne": "Christopher Buehlman delivers a fast-paced, neatly written action adventure that barely lets you notice its shortcomings. Through the eyes of Kinch Na Shannak—an indebted thief with a good heart and bad manners—we journey through a gritty, war-torn fantasy Europe rife with corruption, evil creatures, and strange magicks. Despite the somewhat flat characters and minor inconsistencies in worldbuilding, I think it's a great book. I love Buehlman's take on magic and goblins, and he manages to hit the mark between sarcasm, emotion, and thrill. Beware, or you might get pulled in and eaten alive!",
-      "Thomas": "Im klassischen RPG Sinne kann der Protagonist Kinch Na Shannack alles ein bisschen, aber nichts wirklich gut. Mit viel Glück in der Brust bringt begibt er sich auf eine halsbrecherische Reise mit etwas eindimensionalen Mitstreiter:innen durch eine wunderbar ausgestaltete Welt hinter sich. Fesselnd und witzig.",
-      "Joost": "The Blacktongue Thief feuert in atemlosem Tempo mit Actionszenen, die im besten Sinne unvorhersehbar bleiben. Ruhige Momente, tiefgründige Beziehung oder eine fokussierte Handlung habe ich vermisst, aber einen unterhaltsamen Page-Turner bekommen."
+      "Arne": "Christopher Buehlman delivers a fast-paced, neatly written action adventure that barely lets you notice its shortcomings. Through the eyes of Kinch Na Shannak\u2014an indebted thief with a good heart and bad manners\u2014we journey through a gritty, war-torn fantasy Europe rife with corruption, evil creatures, and strange magicks. Despite the somewhat flat characters and minor inconsistencies in worldbuilding, I think it's a great book. I love Buehlman's take on magic and goblins, and he manages to hit the mark between sarcasm, emotion, and thrill. Beware, or you might get pulled in and eaten alive!",
+      "Thomas": "Im klassischen RPG Sinne kann der Protagonist Kinch Na Shannack alles ein bisschen, aber nichts wirklich gut. Mit viel Gl\u00fcck in der Brust bringt begibt er sich auf eine halsbrecherische Reise mit etwas eindimensionalen Mitstreiter:innen durch eine wunderbar ausgestaltete Welt hinter sich. Fesselnd und witzig.",
+      "Joost": "The Blacktongue Thief feuert in atemlosem Tempo mit Actionszenen, die im besten Sinne unvorhersehbar bleiben. Ruhige Momente, tiefgr\u00fcndige Beziehung oder eine fokussierte Handlung habe ich vermisst, aber einen unterhaltsamen Page-Turner bekommen."
     },
     "meta": {
       "key": "/works/OL21698532W",
@@ -102,6 +102,56 @@
       "time": "",
       "cover_path": "covers/13107142.jpg",
       "cover_url": "https://covers.openlibrary.org/b/id/13107142-M.jpg"
+    }
+  },
+  "OL17732W": {
+    "query": "enter-book-title-here",
+    "review_date": "YYYY-MM-DD",
+    "proposer": "Namehere",
+    "ratings": {
+      "Thomas": null,
+      "Joost": null,
+      "Arne": null
+    },
+    "reviews": {
+      "Thomas": null,
+      "Joost": null,
+      "Arne": null
+    },
+    "meta": {
+      "key": "/works/OL17732W",
+      "type": "work",
+      "title": "Bible",
+      "authors": "Bible",
+      "first_publish_year": 1200,
+      "first_edition": "",
+      "number_of_pages_median": 1464,
+      "first_sentence": "Genesis appropriately stands as the first book of the OT and serves as an essential introduction to the whole Bible.",
+      "description": "A Christian Bible is a set of books divided into the Old and New Testament that a Christian denomination has, at some point in their past or present, regarded as divinely inspired scripture.",
+      "subjects": "Religion, Education, Biography, History, Women, Geography",
+      "edition_count": 6084,
+      "id_wikidata": [
+        "Q117216189",
+        "Q117229017",
+        "Q117229016",
+        "Q117226135",
+        "Q117229027"
+      ],
+      "place": [
+        "Washington (D.C.)",
+        "Assam (India)",
+        "Finland",
+        "kingdom",
+        "Palestine",
+        "Israel",
+        "Garden of Eden"
+      ],
+      "time": [
+        "To 70 A.D.",
+        "living in the spirit"
+      ],
+      "cover_path": "covers/12707846.jpg",
+      "cover_url": "https://covers.openlibrary.org/b/id/12707846-M.jpg"
     }
   }
 }
