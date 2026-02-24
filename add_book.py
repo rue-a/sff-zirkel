@@ -283,7 +283,7 @@ def add_book(isbn, proposer, participants, review_date):
         }
 
         # reuse Open Library work key as ID
-        books[meta["key"].split("/")[1]] = new_book
+        books[meta["key"].split("/")[-1]] = new_book
         save_books(BOOKS_FILE, books)
         print(f"✔ Added book {isbn}")
     return meta
