@@ -1,0 +1,95 @@
+name: Add review from issue
+
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  add-review:
+    if: |
+      contains(github.event.issue.labels.*.name, 'review') &&
+      contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association)
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Ensure labels exist
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const labels = [
+              { name: "automated", color: "adadad", description: "Automatically merge PRs" }
+            ];
+
+            for (const label of labels) {
+              try {
+                await github.rest.issues.getLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: label.name,
+                });
+              } catch {
+                await github.rest.issues.createLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  ...label,
+                });
+              }
+            }
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run reveiw ingestion
+        env:
+          GITHUB_EVENT_PATH: ${{ github.event_path }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python add_review.py
+
+      - name: Create branch and commit
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          BRANCH="add-review-issue-${{ github.event.issue.number }}"
+          git checkout -B "$BRANCH"
+
+          git add data/books.json covers || true
+          git diff --cached --quiet && exit 0
+
+          git commit -m "Add review from issue #${{ github.event.issue.number }}"
+          git push --force origin "$BRANCH"
+
+      - name: Create PR
+        id: pr
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create \
+            --head "add-review-issue-${{ github.event.issue.number }}" \
+            --base main \
+            --title "Add review from issue #${{ github.event.issue.number }}" \
+            --body "Handles #${{ github.event.issue.number }}" \
+            --label "automated"
+
+      # DISABLED bcs I require review from code owner
+      #  - name: Enable native auto-merge
+      #   env:
+      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   run: |
+      #     PR_URL=$(gh pr view --json url -q .url)
+      #     gh pr merge "$PR_URL" --squash --auto --delete-branch
