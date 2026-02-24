@@ -4,6 +4,7 @@ import re
 import os
 from datetime import datetime
 from pathlib import Path
+import uuid
 
 import requests
 
@@ -143,10 +144,10 @@ def download_cover(url: str, out_path: Path):
     print(f"Saved cover to {out_path}")
 
 
-def fetch_openlibrary_metadata(query: str, books: list) -> dict:
+def fetch_openlibrary_metadata(query: str, books: dict) -> dict:
 
-    existing_queries = [book["query"] for book in books]
-    existing_work_keys = [book["meta"]["key"] for book in books]
+    existing_queries = [book["query"] for book in books.values]
+    existing_work_keys = [book["meta"]["key"] for book in books.values]
 
     # %%
     fields = [
@@ -211,7 +212,7 @@ def fetch_openlibrary_metadata(query: str, books: list) -> dict:
     if work_id in existing_work_keys:
         WARNINGS.append(
             warn(
-                f"A work with key `{work_id}` ({next((item['meta']['title'] for item in books if item.get('meta', {}).get('key') == work_id), None)}) already exists — skipping."
+                f"A work with key `{work_id}` ({next(((item['meta']['title'], item['id']) for item in books.values if item.get('meta', {}).get('key') == work_id), None)}) already exists — skipping."
             )
         )
         return False
@@ -281,7 +282,8 @@ def add_book(isbn, proposer, participants, review_date):
             "meta": meta,
         }
 
-        books.append(new_book)
+        # reuse Open Library work key as ID
+        books[meta["key"].split("/")[1]] = new_book
         save_books(BOOKS_FILE, books)
         print(f"✔ Added book {isbn}")
     return meta

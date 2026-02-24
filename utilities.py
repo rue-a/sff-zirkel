@@ -33,9 +33,9 @@ def extract_field(body: str, field: str) -> str:
     return match.group(1).strip() if match else ""
 
 
-def load_books(books_file) -> list:
+def load_books(books_file) -> dict:
     if not books_file.exists():
-        return []
+        return {}
 
     with books_file.open("r", encoding="utf-8") as f:
         return json.load(f)
@@ -49,7 +49,7 @@ def load_club(club_file) -> dict:
         return json.load(f)
 
 
-def save_books(books_file, books: list) -> None:
+def save_books(books_file, books: dict) -> None:
     books_file.parent.mkdir(parents=True, exist_ok=True)
     with books_file.open("w", encoding="utf-8") as f:
         json.dump(books, f, indent=2)
