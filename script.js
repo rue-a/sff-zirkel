@@ -108,7 +108,7 @@ function renderBook(book, club, gradingPopup) {
 		metaLine("Time", join(book.meta.time)),
 		metaLine("OpenLibrary key", `<a href=https://openlibrary.org${book.meta.key}><code>${book.meta.key.replace("/works/", "")}</code></a>`),
 		metaLine(
-			"Wikidata IDs",
+			"Wikidata ID",
 			(book.meta.id_wikidata || [])
 				.map(id => `<a href="https://www.wikidata.org/wiki/${id}"><code>${id}</code></a>`)
 				.join(", ")
