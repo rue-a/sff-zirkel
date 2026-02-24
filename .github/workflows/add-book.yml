@@ -86,9 +86,10 @@ jobs:
             --body "Handles #${{ github.event.issue.number }}" \
             --label "automated"
 
-      - name: Enable native auto-merge
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          PR_URL=$(gh pr view --json url -q .url)
-          gh pr merge "$PR_URL" --squash --auto --delete-branch
+      # DISABLED bcs I require review from code owner
+      #  - name: Enable native auto-merge
+      #   env:
+      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   run: |
+      #     PR_URL=$(gh pr view --json url -q .url)
+      #     gh pr merge "$PR_URL" --squash --auto --delete-branch
