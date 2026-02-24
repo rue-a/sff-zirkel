@@ -28,7 +28,6 @@ def build_summary(
     reviewer: str,
     grade: str,
     review: list[str],
-    meta: dict | None,
     warnings: list[str],
     notices: list[str],
 ) -> str:
