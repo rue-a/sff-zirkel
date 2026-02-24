@@ -7,6 +7,16 @@ from pathlib import Path
 
 import requests
 
+from utilities import (
+    notice,
+    warn,
+    join_and,
+    extract_field,
+    load_books,
+    load_club,
+    save_books,
+    post_issue_comment,
+)
 
 # ---------- Configuration ----------
 BOOKS_FILE = Path("data/books.json")
@@ -121,28 +131,6 @@ BOOK_GENRES = [
 # -----------------------------------
 
 
-def notice(msg):
-    print(f"::notice::{msg}")
-    NOTICES.append(msg)
-
-
-def warn(msg):
-    print(f"::warning::{msg}")
-    WARNINGS.append(msg)
-
-
-def extract_field(body: str, field: str) -> str:
-    """
-    Extracts values like:
-    - ISBN: `9781234567890`
-    - review date: `2025-03-14`
-    - proposer: `arne`
-    """
-    pattern = rf"- {re.escape(field)}:\s*`([^`]*)`"
-    match = re.search(pattern, body, re.IGNORECASE)
-    return match.group(1).strip() if match else ""
-
-
 def download_cover(url: str, out_path: Path):
     out_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -183,7 +171,7 @@ def fetch_openlibrary_metadata(query: str, books: list) -> dict:
 
     # do not run the same query twice
     if query in existing_queries:
-        warn(f"The query `{query}` was already queried — skipping.")
+        WARNINGS.append(warn(f"The query `{query}` was already queried — skipping."))
         return False
 
     response = requests.get(
@@ -191,7 +179,7 @@ def fetch_openlibrary_metadata(query: str, books: list) -> dict:
         params=params,
         timeout=10,
     )
-    notice(f"Querying: {query} (actual query URL: {response.url})")
+    NOTICES.append(notice((f"Querying: {query} (actual query URL: {response.url})")))
 
     # raise_for_status() throws exception if request failed
     response.raise_for_status()
@@ -199,12 +187,14 @@ def fetch_openlibrary_metadata(query: str, books: list) -> dict:
 
     # check if we found a book (numFound > 0)
     if not response_data.get("numFound", False):
-        warn(f"No results found on OpenLibrary for query `{query}`.")
+        WARNINGS.append(warn(f"No results found on OpenLibrary for query `{query}`."))
         return False
 
     if response_data["numFound"] > 1:
-        warn(
-            f"Result is ambigous, {response_data['numFound']} matches found. Selecting match with most editions."
+        WARNINGS.append(
+            warn(
+                f"Result is ambigous, {response_data['numFound']} matches found. Selecting match with most editions."
+            )
         )
 
     # data is in the docs attribute (we sorted by edition count in the query -> first entry has most editions)
@@ -212,15 +202,17 @@ def fetch_openlibrary_metadata(query: str, books: list) -> dict:
 
     for field in fields:
         if field not in response_data.keys():
-            notice(f"The field `{field}` yielded no data")
+            NOTICES.append(notice((f"The field `{field}` yielded no data")))
 
     # in open library terms, a work is the sum of all editions
     work_id = response_data["key"]
 
     # Check for duplicates, stop if book already exists in db
     if work_id in existing_work_keys:
-        warn(
-            f"A work with key `{work_id}` ({next((item['meta']['title'] for item in books if item.get('meta', {}).get('key') == work_id), None)}) already exists — skipping."
+        WARNINGS.append(
+            warn(
+                f"A work with key `{work_id}` ({next((item['meta']['title'] for item in books if item.get('meta', {}).get('key') == work_id), None)}) already exists — skipping."
+            )
         )
         return False
 
@@ -235,7 +227,7 @@ def fetch_openlibrary_metadata(query: str, books: list) -> dict:
         # store cover at covers
         download_cover(cover_url, cover_path)
     else:
-        notice("The query yielded no cover image")
+        NOTICES.append(notice(("The query yielded no cover image")))
 
     stringified_data = {
         "key": response_data.get("key", ""),
@@ -265,37 +257,8 @@ def fetch_openlibrary_metadata(query: str, books: list) -> dict:
     return stringified_data
 
 
-def join_and(xs, oxford=True):
-    if len(xs) <= 2:
-        return " and ".join(xs)
-    sep = ", and " if oxford else " and "
-    return ", ".join(xs[:-1]) + sep + xs[-1]
-
-
-def load_books() -> list:
-    if not BOOKS_FILE.exists():
-        return []
-
-    with BOOKS_FILE.open("r", encoding="utf-8") as f:
-        return json.load(f)
-
-
-def load_club() -> dict:
-    if not CLUB_FILE.exists():
-        return {}
-
-    with CLUB_FILE.open("r", encoding="utf-8") as f:
-        return json.load(f)
-
-
-def save_books(books: list) -> None:
-    BOOKS_FILE.parent.mkdir(parents=True, exist_ok=True)
-    with BOOKS_FILE.open("w", encoding="utf-8") as f:
-        json.dump(books, f, indent=2)
-
-
 def add_book(isbn, proposer, participants, review_date):
-    books = load_books()
+    books = load_books(BOOKS_FILE)
 
     # Fetch metadata to validate ISBN exists
     meta = fetch_openlibrary_metadata(isbn, books)
@@ -319,7 +282,7 @@ def add_book(isbn, proposer, participants, review_date):
         }
 
         books.append(new_book)
-        save_books(books)
+        save_books(BOOKS_FILE, books)
         print(f"✔ Added book {isbn}")
     return meta
 
@@ -390,44 +353,6 @@ def build_summary(
     return "\n".join(lines)
 
 
-def post_issue_comment(body: str):
-    """
-    Post a comment to the current GitHub issue.
-    """
-    token = os.environ.get("GITHUB_TOKEN")
-    repo = os.environ.get("GITHUB_REPOSITORY")
-    event_path = os.environ.get("GITHUB_EVENT_PATH")
-
-    if not all([token, repo, event_path]):
-        print("Missing GitHub context — not posting comment.")
-        return
-
-    with open(event_path, "r", encoding="utf-8") as f:
-        event = json.load(f)
-
-    issue_number = event.get("issue", {}).get("number")
-    if not issue_number:
-        print("Could not determine issue number from event — skipping comment.")
-        return
-
-    url = f"https://api.github.com/repos/{repo}/issues/{issue_number}/comments"
-
-    headers = {
-        "Authorization": f"Bearer {token}",
-        "Accept": "application/vnd.github+json",
-    }
-
-    resp = requests.post(
-        url,
-        headers=headers,
-        json={"body": body},
-        timeout=10,
-    )
-
-    resp.raise_for_status()
-    print("✔ Posted summary comment")
-
-
 def parse_issue():
     """
     Parse GitHub issue payload and add a book entry.
@@ -459,7 +384,9 @@ def parse_issue():
     # if isbn is not valid, try with entered title
     if len(query) not in (10, 13):
         fallback = title.strip()
-        warn(f"No valid ISBN detected, trying issue title: `{fallback}`")
+        WARNINGS.append(
+            warn((f"No valid ISBN detected, trying issue title: `{fallback}`"))
+        )
         query = fallback
 
     # -------------------------------
@@ -479,13 +406,13 @@ def parse_issue():
     }
 
     if review_date == defaults["review date"]:
-        warn("Review date is still placeholder (`YYYY-MM-DD`).")
+        WARNINGS.append(warn(("Review date is still placeholder (`YYYY-MM-DD`).")))
 
     if proposer == defaults["proposer"]:
-        warn("Proposer is still placeholder (`namehere`).")
+        WARNINGS.append(warn(("Proposer is still placeholder (`namehere`).")))
 
     if guests_raw == defaults["guests"]:
-        warn("Guests are still placeholder, not adding guests.")
+        WARNINGS.append(warn(("Guests are still placeholder, not adding guests.")))
         guests_raw = ""
 
     # -------------------------------
@@ -495,19 +422,21 @@ def parse_issue():
         try:
             datetime.strptime(review_date, "%Y-%m-%d")
         except ValueError:
-            warn(f"Review date `{review_date}` is not in YYYY-MM-DD format.")
+            WARNINGS.append(
+                warn((f"Review date `{review_date}` is not in YYYY-MM-DD format."))
+            )
 
     # -------------------------------
     # Participants parsing
     # -------------------------------
 
-    club_meta = load_club()
+    club_meta = load_club(CLUB_FILE)
     participants = club_meta["permanent_members"] + [
         p.strip() for p in guests_raw.split(",") if p.strip()
     ]
 
     if not participants:
-        warn("No participants specified.")
+        WARNINGS.append(warn(("No participants specified.")))
 
     # -------------------------------
     # Add book
