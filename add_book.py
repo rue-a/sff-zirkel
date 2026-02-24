@@ -250,7 +250,7 @@ def fetch_openlibrary_metadata(query: str, books: list) -> dict:
         "id_wikidata": list(set(response_data.get("id_wikidata", []))),
         "place": response_data.get("place", ""),
         "time": response_data.get("time", ""),
-        "cover_path": cover_path.as_posix(),
+        "cover_path": cover_path.as_posix() if cover_path else None,
         "cover_url": cover_url,
     }
 
