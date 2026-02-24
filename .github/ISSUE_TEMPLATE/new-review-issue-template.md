@@ -13,8 +13,8 @@ Upon finding a book with the provided ID in the books database and if the provid
 
 # Review
 
-- Book ID: `enter-book-id-here`
-- Reviewer: `enter-reviewer-name-here`
-- Grade: `enter-grade-here` (number from 1 to 15)
+- book id: `enter-book-id-here`
+- reviewer: `enter-reviewer-name-here`
+- grade: `enter-grade-here` (number from 1 to 15)
 - review: `enter-review-text-here`
  

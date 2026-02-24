@@ -14,7 +14,7 @@ def warn(msg):
     return msg
 
 
-def join_and(xs, oxford=True):
+def join_and(xs: list, oxford=True):
     if len(xs) <= 2:
         return " and ".join(xs)
     sep = ", and " if oxford else " and "

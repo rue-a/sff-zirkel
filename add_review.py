@@ -128,6 +128,7 @@ def parse_issue():
     Extracts book_id, reviewer, grade, and text from issue.
     Emits warnings for placeholder values and invalid dates.
     """
+    failed = False
 
     event_path = Path(os.environ.get("GITHUB_EVENT_PATH", ""))
 
@@ -144,85 +145,53 @@ def parse_issue():
     body = issue.get("body", "")
 
     # -------------------------------
-    # ISBN from title
+    # review data from body
     # -------------------------------
-    # Keep digits and X only (ISBN-10 or 13)
-    isbn = re.sub(r"[^0-9X]", "", extract_field(body, "ISBN"))
-    query = isbn
-
-    # if isbn is not valid, try with entered title
-    if len(query) not in (10, 13):
-        fallback = title.strip()
-        WARNINGS.append(
-            warn((f"No valid ISBN detected, trying issue title: `{fallback}`"))
-        )
-        query = fallback
-
-    # -------------------------------
-    # Metadata from body
-    # -------------------------------
-    review_date = extract_field(body, "review date")
-    proposer = extract_field(body, "proposer")
-    guests_raw = extract_field(body, "guests")
+    book_id = extract_field(body, "book id")
+    reviewer = extract_field(body, "reviewer")
+    grade = extract_field(body, "grade")
+    review = extract_field(body, "review")
 
     # -------------------------------
     # Detect placeholder / defaults
     # -------------------------------
-    defaults = {
-        "review date": "YYYY-MM-DD",
-        "proposer": "namehere",
-        "guests": "namehere, namehere, namehere",
-    }
-
-    if review_date == defaults["review date"]:
-        WARNINGS.append(warn(("Review date is still placeholder (`YYYY-MM-DD`).")))
-
-    if proposer == defaults["proposer"]:
-        WARNINGS.append(warn(("Proposer is still placeholder (`namehere`).")))
-
-    if guests_raw == defaults["guests"]:
-        WARNINGS.append(warn(("Guests are still placeholder, not adding guests.")))
-        guests_raw = ""
+    # defaults = {
+    #     "book id": "enter-book-id-here",
+    #     "reviewer": "enter-reviewer-name-here",
+    #     "grade": "enter-grade-here",
+    #     "review": "enter-review-text-here",
+    # }
 
     # -------------------------------
     # Date validation (non-fatal)
     # -------------------------------
-    if review_date:
-        try:
-            datetime.strptime(review_date, "%Y-%m-%d")
-        except ValueError:
-            WARNINGS.append(
-                warn((f"Review date `{review_date}` is not in YYYY-MM-DD format."))
+    books = load_books(BOOKS_FILE)
+
+    if not books.get(book_id, False):
+        WARNINGS.append(warn(f"Book id '{book_id}' not found! Exiting."))
+        failed = True
+
+    if reviewer not in books[book_id]["reviews"].keys():
+        WARNINGS.append(
+            warn(
+                f"Reviewer '{reviewer}' was no participant ({join_and(books[book_id]['reviews'].keys())})."
             )
+        )
+        failed = True
+
+    if not isinstance(grade, (int)) or 1 <= grade <= 15:
+        WARNINGS.append(warn(f"Grade '{grade}' is not an integer between 1 and 15."))
+        failed = True
 
     # -------------------------------
     # Participants parsing
-    # -------------------------------
-
-    club_meta = load_club(CLUB_FILE)
-    participants = club_meta["permanent_members"] + [
-        p.strip() for p in guests_raw.split(",") if p.strip()
-    ]
-
-    if not participants:
-        WARNINGS.append(warn(("No participants specified.")))
-
-    # -------------------------------
-    # Add book
-    # -------------------------------
-    book_meta = add_book(
-        isbn=query,
-        proposer=proposer,
-        participants=participants,
-        review_date=review_date,
-    )
+    # ------------------------------
 
     summary = build_summary(
-        query=query,
-        review_date=review_date,
-        proposer=proposer,
-        participants=participants,
-        meta=book_meta,
+        book_id=book_id,
+        reviewer=reviewer,
+        grade=grade,
+        review=review,
         warnings=WARNINGS,
         notices=NOTICES,
     )
@@ -230,7 +199,15 @@ def parse_issue():
     post_issue_comment(summary)
     print(f"::notice::{summary}")
 
-    return bool(book_meta)
+    if failed:
+        return False
+
+    books[book_id]["ratings"][reviewer] = grade
+    books[book_id]["reviews"][reviewer] = review
+
+    save_books(BOOKS_FILE, books)
+
+    return True
 
 
 if __name__ == "__main__":
