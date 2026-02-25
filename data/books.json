@@ -44,9 +44,9 @@
       "Joost": 10
     },
     "reviews": {
-      "Arne": "Christopher Buehlman delivers a fast-paced, neatly written action adventure that barely lets you notice its shortcomings. Through the eyes of Kinch Na Shannak—an indebted thief with a good heart and bad manners—we journey through a gritty, war-torn fantasy Europe rife with corruption, evil creatures, and strange magicks. Despite the somewhat flat characters and minor inconsistencies in worldbuilding, I think it's a great book. I love Buehlman's take on magic and goblins, and he manages to hit the mark between sarcasm, emotion, and thrill. Beware, or you might get pulled in and eaten alive!",
-      "Thomas": "Im klassischen RPG Sinne kann der Protagonist Kinch Na Shannack alles ein bisschen, aber nichts wirklich gut. Mit viel Glück in der Brust bringt begibt er sich auf eine halsbrecherische Reise mit etwas eindimensionalen Mitstreiter:innen durch eine wunderbar ausgestaltete Welt hinter sich. Fesselnd und witzig.",
-      "Joost": "The Blacktongue Thief feuert in atemlosem Tempo mit Actionszenen, die im besten Sinne unvorhersehbar bleiben. Ruhige Momente, tiefgründige Beziehung oder eine fokussierte Handlung habe ich vermisst, aber einen unterhaltsamen Page-Turner bekommen."
+      "Arne": "Christopher Buehlman delivers a fast-paced, neatly written action adventure that barely lets you notice its shortcomings. Through the eyes of Kinch Na Shannak\u2014an indebted thief with a good heart and bad manners\u2014we journey through a gritty, war-torn fantasy Europe rife with corruption, evil creatures, and strange magicks. Despite the somewhat flat characters and minor inconsistencies in worldbuilding, I think it's a great book. I love Buehlman's take on magic and goblins, and he manages to hit the mark between sarcasm, emotion, and thrill. Beware, or you might get pulled in and eaten alive!",
+      "Thomas": "Im klassischen RPG Sinne kann der Protagonist Kinch Na Shannack alles ein bisschen, aber nichts wirklich gut. Mit viel Gl\u00fcck in der Brust bringt begibt er sich auf eine halsbrecherische Reise mit etwas eindimensionalen Mitstreiter:innen durch eine wunderbar ausgestaltete Welt hinter sich. Fesselnd und witzig.",
+      "Joost": "The Blacktongue Thief feuert in atemlosem Tempo mit Actionszenen, die im besten Sinne unvorhersehbar bleiben. Ruhige Momente, tiefgr\u00fcndige Beziehung oder eine fokussierte Handlung habe ich vermisst, aber einen unterhaltsamen Page-Turner bekommen."
     },
     "meta": {
       "key": "/works/OL21698532W",
@@ -102,6 +102,55 @@
       "time": "",
       "cover_path": "covers/13107142.jpg",
       "cover_url": "https://covers.openlibrary.org/b/id/13107142-M.jpg"
+    }
+  },
+  "OL21745884W": {
+    "query": "9780593135204",
+    "review_date": "YYYY-MM-DD",
+    "proposer": "Thomas",
+    "ratings": {
+      "Thomas": null,
+      "Joost": null,
+      "Arne": null
+    },
+    "reviews": {
+      "Thomas": null,
+      "Joost": null,
+      "Arne": null
+    },
+    "meta": {
+      "key": "/works/OL21745884W",
+      "type": "work",
+      "title": "Project Hail Mary",
+      "authors": "Andy Weir",
+      "first_publish_year": 2021,
+      "first_edition": "",
+      "number_of_pages_median": 496,
+      "first_sentence": "\u201cWhat\u2019s two plus two?\u201d",
+      "description": "Ryland Grace is the sole survivor on a desperate, last-chance mission\u2013and if he fails, humanity and the earth itself will perish. Except that right now, he doesn\u2019t know that. He can\u2019t even remember his own name, let alone the nature of his assignment or how to complete it. All he knows is that he\u2019s been asleep for a very, very long time. And he\u2019s just been awakened to find himself millions of miles from home, with nothing but two corpses for company.\r\n\r\nHis crewmates dead, his memories fuzzily returning, he realizes that an impossible task now confronts him. Alone on this tiny ship that\u2019s been cobbled together by every government and space agency on the planet and hurled into the depths of space, it\u2019s up to him to conquer an extinction-level threat to our species.\r\n\r\nAnd thanks to an unexpected ally, he just might have a chance.\r\n\r\nPart scientific mystery, part dazzling interstellar journey, *Project Hail Mary* is a tale of discovery, speculation, and survival to rival *The Martian*\u2013while taking us to places it never dreamed of going.",
+      "subjects": "Fiction",
+      "edition_count": 23,
+      "id_wikidata": [
+        "Q107545754",
+        "Q107545582",
+        "Q136606176",
+        "Q107545729"
+      ],
+      "place": [
+        "Epsilon Eridani",
+        "Earth",
+        "Tau Ceti",
+        "San Francisco (Calif.)",
+        "Pasadena (Calif.)",
+        "Antarctica",
+        "40 Eridani",
+        "Baikonur (Kazakhstan)",
+        "South China Sea region",
+        "Sahara Desert (Africa)"
+      ],
+      "time": "",
+      "cover_path": "covers/11200092.jpg",
+      "cover_url": "https://covers.openlibrary.org/b/id/11200092-M.jpg"
     }
   }
 }
