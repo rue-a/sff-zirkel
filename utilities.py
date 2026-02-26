@@ -52,7 +52,7 @@ def load_club(club_file) -> dict:
 def save_books(books_file, books: dict) -> None:
     books_file.parent.mkdir(parents=True, exist_ok=True)
     with books_file.open("w", encoding="utf-8") as f:
-        json.dump(books, f, indent=2)
+        json.dump(books, f, ensure_ascii=False, indent=4)
 
 
 def post_issue_comment(body: str):
