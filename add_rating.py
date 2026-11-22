@@ -121,7 +121,7 @@ def parse_issue():
                 success = False
 
     try:
-        parsed_rating = parse_rating(rating, club, warnings)
+        parsed_rating = parse_rating(rating, club)
     except ParsingError as e:
         warnings.append(warn(str(e)))
         success = False
