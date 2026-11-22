@@ -228,7 +228,7 @@
         "proposer": "Arne",
         "ratings": {
             "Thomas": null,
-            "Joost": null,
+            "Joost": 11,
             "Arne": null
         },
         "reviews": {
